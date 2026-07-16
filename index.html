@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#1A1A2E" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F9DF6D" media="(prefers-color-scheme: light)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Palabras Conectadas" />
+    <link rel="apple-touch-icon" href="/icon-192x192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- SEO Meta Tags -->
+    <title>Palabras Conectadas — La Conexión del Día</title>
+    <meta name="description" content="Descubre las conexiones entre palabras. Un juego diario de asociación de palabras en español. 4 grupos de 4. ¿Puedes encontrar todas las conexiones? Juego nuevo cada día." />
+    <link rel="canonical" href="https://laconexiondeldia.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Palabras Conectadas — La Conexión del Día" />
+    <meta property="og:description" content="Descubre las conexiones entre palabras. Un juego diario de asociación de palabras en español. Encuentra los 4 grupos ocultos de 4 palabras que comparten un tema común." />
+    <meta property="og:url" content="https://laconexiondeldia.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content="https://laconexiondeldia.com/og-image.png" />
+    <meta property="og:image:width" content="1376" />
+    <meta property="og:image:height" content="768" />
+    <meta property="og:image:type" content="image/png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Palabras Conectadas — La Conexión del Día" />
+    <meta name="twitter:description" content="Descubre las conexiones entre palabras. Un juego diario de asociación de palabras en español." />
+    <meta name="twitter:image" content="https://laconexiondeldia.com/og-image.png" />
+
+    <!-- Google AdSense (auto-ads) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5361044982771544"
+      crossorigin="anonymous"></script>
+
+    <!-- Google Analytics (GA4) - Se carga dinámicamente via VITE_GA_MEASUREMENT_ID -->
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Palabras Conectadas",
+      "url": "https://laconexiondeldia.com/",
+      "description": "Un juego diario de conexiones de palabras en español donde los jugadores encuentran grupos de palabras relacionadas. 4 categorías ocultas, 16 palabras, un nuevo desafío cada día.",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "All",
+      "inLanguage": "es",
+      "author": {
+        "@type": "Organization",
+        "name": "Palabras Conectadas"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- Article Schema for homepage content -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Palabras Conectadas: El juego diario de conexiones de palabras en español",
+      "description": "Un juego de palabras diario donde debes encontrar 4 grupos de 4 palabras que comparten un tema común. Desafía tu vocabulario y agilidad mental cada día.",
+      "author": {
+        "@type": "Organization",
+        "name": "Palabras Conectadas"
+      },
+      "datePublished": "2026-06-15",
+      "dateModified": "2026-07-02",
+      "inLanguage": "es",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://laconexiondeldia.com/"
+      }
+    }
+    </script>
+
+    <style>
+      /* Content visible before JS loads — also provides AdSense content */
+      .pre-content, .post-content {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0 16px;
+        font-family: "Karla", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+      }
+      .post-content {
+        padding-bottom: 2rem;
+      }
+      .seo-content {
+        display: none;
+      }
+      .seo-content.visible {
+        display: block;
+      }
+      .seo-content h2 {
+        font-size: 1.15rem;
+        margin: 0 0 0.5rem;
+        color: #1a1a2e;
+      }
+      .seo-content h3 {
+        font-size: 1rem;
+        margin: 0 0 0.3rem;
+        color: #333;
+      }
+      .seo-content p, .seo-content li {
+        font-size: 0.875rem;
+        color: #555;
+        margin-bottom: 0.5rem;
+      }
+      .seo-content ul {
+        padding-left: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+      .seo-content hr {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin: 1.5rem 0;
+      }
+      /* Make SEO content visible once JS hides it */
+      .seo-content-delayed {
+        display: block;
+      }
+      .seo-hidden .seo-content {
+        display: none;
+      }
+      [data-theme="dark"] .seo-content h2 { color: #e0e0e0; }
+      [data-theme="dark"] .seo-content h3 { color: #ccc; }
+      [data-theme="dark"] .seo-content p,
+      [data-theme="dark"] .seo-content li { color: #aaa; }
+      .skeleton-game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 20px 0;
+      }
+      .skeleton-row {
+        display: flex;
+        gap: 8px;
+      }
+      .skeleton-tile {
+        width: 72px;
+        height: 56px;
+        background: linear-gradient(90deg, #efefe6 25%, #e5e5da 50%, #efefe6 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 8px;
+      }
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    </style>
+  </head>
+  <body class="bg-white dark:bg-gray-900">
+    <!-- SEO content: visible to crawlers and before JS loads -->
+    <div class="pre-content seo-content visible" id="seo-top">
+      <header style="text-align:center;padding:16px 0 4px">
+        <h1 style="font-size:1.3rem;font-weight:800;letter-spacing:0.5px;margin:0">PALABRAS CONECTADAS</h1>
+        <p style="font-size:0.8rem;color:#666;margin:4px 0 0">La Conexión del Día — Juego diario de palabras en español</p>
+      </header>
+    </div>
+
+    <div id="root">
+      <!-- Static fallback content (before JS loads) -->
+      <noscript>
+        <div style="max-width:500px;margin:0 auto;padding:16px;font-family:sans-serif">
+          <h1 style="font-size:1.5rem">Palabras Conectadas</h1>
+          <p>La Conexión del Día — un juego diario de conexiones de palabras en español.</p>
+          <p>Para jugar, activa JavaScript en tu navegador. Cada día encontrarás 16 palabras que debes agrupar en 4 categorías ocultas de 4 palabras cada una, con 4 palabras señuelo adicionales.</p>
+          <p>Categorías: Fácil (amarillo), Media (verde), Difícil (azul), Muy difícil (morado).</p>
+          <p>Modo Normal: 4 errores permitidos. Modo Difícil: 3 errores y 8 señuelos.</p>
+          <p>También puedes explorar puzzles anteriores en el archivo y desafiar a tus amigos.</p>
+        </div>
+      </noscript>
+    </div>
+
+    <!-- SEO content below the game: provides visible content for AdSense compliance -->
+    <div class="post-content seo-content visible" id="seo-bottom">
+      <hr />
+
+      <section>
+        <h2>Juego diario de conexiones de palabras en español</h2>
+        <p>Palabras Conectadas es un juego diario de conexiones de palabras en español, inspirado en el popular formato de "connections". Cada día, los jugadores reciben 16 palabras que deben organizar en 4 grupos ocultos de 4 palabras cada una, donde cada grupo comparte un tema o categoría común.</p>
+        <p>Además de las 16 palabras del puzzle, el juego incluye <strong>4 palabras señuelo</strong> (8 en modo Difícil) diseñadas para confundir y hacer el desafío más entretenido. Solo los verdaderos maestros de las palabras logran identificar todas las conexiones.</p>
+        <p>El juego se ha convertido en una rutina diaria para miles de jugadores hispanohablantes que buscan ejercitar su mente mientras se divierten. Con más de 334 puzzles disponibles y contenido nuevo cada día, siempre hay un desafío esperándote.</p>
+      </section>
+
+      <hr />
+
+      <section>
+               <h2>Cómo jugar: reglas básicas</h2>
+        <ol>
+          <li><strong>Observa las 20 palabras</strong> (16 del puzzle + 4 señuelos en modo Normal) que aparecen en la pantalla.</li>
+          <li><strong>Selecciona 4 palabras</strong> que creas que comparten un tema común y presiona "Enviar".</li>
+          <li><strong>Si aciertas</strong>, las 4 palabras se agruparán y se revelará su categoría con un color distintivo.</li>
+          <li><strong>Si fallas</strong>, perderás un intento. Tienes 4 errores en modo Normal y 3 en modo Difícil.</li>
+          <li><strong>Gana el juego</strong> identificando las 4 categorías antes de agotar tus errores.</li>
+        </ol>
+        <p>Los grupos se ordenan por dificultad: <strong>amarillo</strong> (fácil), <strong>verde</strong> (medio), <strong>azul</strong> (difícil) y <strong>morado</strong> (muy difícil). Las categorías moradas suelen involucrar juegos de palabras, referencias culturales o conexiones inesperadas. Para una guía más detallada, visita <a href="/como-jugar/">cómo jugar</a>.</p>
+          </section>
+
+      <hr />
+
+      <section>
+        <h2>Modos de juego</h2>
+        <h3>Modo Normal</h3>
+        <p>El modo clásico: 16 palabras, 4 señuelos, 4 errores permitidos. Perfecto para empezar el día con un desafío mental accesible pero estimulante. Las categorías van de fáciles a difíciles, ofreciendo una experiencia equilibrada para jugadores de todos los niveles.</p>
+        <h3>Modo Difícil</h3>
+        <p>Para jugadores experimentados: 16 palabras, 8 señuelos, solo 3 errores. Mayor complejidad en las categorías y más distracciones. Las palabras señuelo adicionales están diseñadas específicamente para confundir, haciendo que cada intento cuente aún más. Solo para los más valientes.</p>
+        <h3>Edición Mundial 2026</h3>
+        <p>Durante la Copa del Mundo 2026, disfruta de puzzles temáticos con categorías relacionadas con el fútbol, selecciones nacionales, jugadores históricos, estadios icónicos y términos futboleros de todo el mundo hispanohablante. Contenido exclusivo por tiempo limitado que rota durante el torneo.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Beneficios cognitivos de jugar juegos de palabras</h2>
+        <p>Los juegos de palabras como Palabras Conectadas ofrecen numerosos beneficios para la salud mental y el desarrollo cognitivo. Diversos estudios han demostrado que el entrenamiento cerebral regular con juegos de lenguaje puede:</p>
+        <ul>
+          <li><strong>Ejercicio mental diario:</strong> mantener tu cerebro activo con juegos de palabras ayuda a mejorar la agilidad mental, la memoria de trabajo y la velocidad de procesamiento. Dedicar 10-15 minutos al día a un puzzle cognitivo puede marcar una diferencia significativa a largo plazo.</li>
+          <li><strong>Ampliación de vocabulario:</strong> cada puzzle te expone a nuevas palabras, sinónimos y significados alternativos, enriqueciendo tu léxico en español. Con más de 334 puzzles, el vocabulario acumulado es enorme.</li>
+          <li><strong>Pensamiento lateral y creatividad:</strong> las categorías requieren conectar conceptos de formas no obvias. Esta habilidad de pensamiento divergente se transfiere a otras áreas de la vida, ayudándote a encontrar soluciones creativas a problemas cotidianos.</li>
+          <li><strong>Mejora de la concentración:</strong> resolver un puzzle requiere atención sostenida y enfoque. Con la práctica, esta capacidad de concentración mejora y se extiende a otras actividades.</li>
+          <li><strong>Reducción del estrés:</strong> dedicar unos minutos a un juego de palabras puede servir como una pausa mental, ayudando a desconectar de las preocupaciones diarias y reducir los niveles de estrés.</li>
+          <li><strong>Rutina saludable:</strong> un puzzle nuevo cada día crea una rutina de estimulación cognitiva matutina o en cualquier momento del día, similar a hacer ejercicio físico pero para el cerebro.</li>
+          <li><strong>Conexión social:</strong> compartir resultados y desafiar a amigos crea un sentido de comunidad y competencia amistosa que fortalece las relaciones sociales.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Palabras Conectadas como herramienta de aprendizaje de español</h2>
+        <p>Palabras Conectadas no es solo un juego, sino también una herramienta valiosa para quienes están aprendiendo español o desean mejorar su dominio del idioma. Cada puzzle ofrece:</p>
+        <ul>
+          <li><strong>Vocabulario contextual:</strong> las palabras se presentan en un contexto temático, lo que facilita la memorización y comprensión de su significado.</li>
+          <li><strong>Conexiones semánticas:</strong> al agrupar palabras por categorías, el jugador internaliza relaciones de significado entre términos, fortaleciendo su red léxica mental.</li>
+          <li><strong>Variedad regional:</strong> los puzzles incluyen palabras de diferentes regiones hispanohablantes, exponiendo a los jugadores a la riqueza y diversidad del español global.</li>
+          <li><strong>Aprendizaje lúdico:</strong> el formato de juego hace que el aprendizaje sea entretenido y motivador, aumentando la retención de vocabulario nuevo.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Estrategias para resolver conexiones como un experto</h2>
+        <p>¿Atascado en un puzzle? Prueba estas estrategias para encontrar las conexiones ocultas:</p>
+        <ul>
+          <li><strong>Busca lo obvio primero:</strong> identifica categorías claras como colores, animales, frutas o países. Son las más fáciles (amarillas) y resolverlas te dará impulso y reducirá las opciones restantes.</li>
+          <li><strong>Palabras con doble sentido:</strong> si una palabra no encaja donde esperabas, puede tener un significado alternativo. "Banco" puede ser un asiento, una institución financiera o un lugar en un río. "Sierra" puede ser una herramienta o una cadena montañosa.</li>
+          <li><strong>Usa el botón Mezclar:</strong> cambiar el orden de las palabras puede revelar patrones que no veías. Una nueva disposición visual reactiva tu capacidad de observación.</li>
+          <li><strong>Descarta señuelos:</strong> si una palabra causa mucha confusión o parece encajar en varias categorías sin terminar de convencer, probablemente es un señuelo. Concéntrate en las palabras restantes.</li>
+          <li><strong>Eliminación estratégica:</strong> a veces, saber qué combinaciones NO funcionan es la mejor pista. Si tienes una corazonada fuerte, arriesgar un error puede darte información valiosa.</li>
+          <li><strong>Categorías moradas:</strong> son las más creativas. Piensa en juegos de palabras, referencias culturales, prefijos o sufijos compartidos, o palabras que pueden ser verbos y sustantivos a la vez.</li>
+        </ul>
+        <p>Para una guía completa con estrategias por nivel de habilidad, visita nuestra <a href="/tips/">página de consejos y trucos</a>.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Puzzles anteriores y modo archivo</h2>
+        <p>¿Te perdiste un puzzle? No hay problema. Usa el icono de calendario en la esquina superior izquierda para acceder al archivo completo de puzzles desde el lanzamiento. Puedes explorar cualquier fecha y jugar todos los puzzles anteriores. Cada puzzle es tan desafiante como el del día actual, con sus propias categorías únicas y palabras cuidadosamente seleccionadas.</p>
+        <p>El archivo es perfecto para practicar, ponerse al día con puzzles que te perdiste, o simplemente disfrutar de más contenido cuando completes el puzzle del día. Todos los modos (Normal, Difícil y Especial) están disponibles en el archivo.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Comparte tus resultados y desafía a tus amigos</h2>
+        <p>Una de las características más populares de Palabras Conectadas es la posibilidad de compartir tus resultados. Una vez que completes el puzzle del día:</p>
+        <ul>
+          <li><strong>Comparte en WhatsApp:</strong> envía tu resultado con el formato visual de colores a tus contactos directamente desde el juego.</li>
+          <li><strong>Comparte en X (Twitter):</strong> publica tu resultado en tu timeline y compara con otros jugadores.</li>
+          <li><strong>Desafía a un amigo:</strong> genera un enlace único para que un amigo juegue exactamente el mismo puzzle. Al completarlo, podrán comparar errores y tiempo de resolución. ¿Quién será el maestro de las conexiones?</li>
+          <li><strong>Comparte resultados combinados:</strong> si juegas los modos Normal y Difícil, puedes compartir ambos resultados en un solo mensaje.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Comparación con otros juegos de palabras</h2>
+        <p>Palabras Conectadas se distingue de otros juegos de palabras populares por varias características únicas:</p>
+        <ul>
+          <li><strong>Formato de conexiones:</strong> a diferencia de juegos como Wordle (una palabra diaria), Palabras Conectadas presenta 16 palabras que debes agrupar en categorías, ofreciendo un desafío más complejo y variado.</li>
+          <li><strong>Pistas ocultas y señuelos:</strong> las palabras señuelo añaden una capa adicional de dificultad que no existe en otros formatos, obligando a los jugadores a pensar críticamente.</li>
+          <li><strong>Modos múltiples:</strong> Normal, Difícil y Ediciones Especiales ofrecen variedad y replayability.</li>
+          <li><strong>Enfoque en español:</strong> a diferencia de la mayoría de juegos de palabras que están en inglés, Palabras Conectadas está diseñado específicamente para hablantes de español, con contenido culturalmente relevante.</li>
+          <li><strong>Comunidad hispanohablante:</strong> los puzzles están creados pensando en la riqueza y diversidad del español, incluyendo palabras y referencias de distintas regiones.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Consejos para principiantes</h2>
+        <p>Si eres nuevo en Palabras Conectadas, aquí tienes algunos consejos para empezar con buen pie:</p>
+        <ul>
+          <li><strong>No te apresures:</strong> tómate un minuto para leer todas las palabras antes de hacer tu primer intento. Observa el panorama completo.</li>
+          <li><strong>Empieza con el modo Normal:</strong> el modo Difícil es ideal una vez que domines el formato básico. Dale tiempo a tu cerebro para adaptarse.</li>
+          <li><strong>Cada error es una lección:</strong> no te frustres si fallas. Cada intento incorrecto te da información sobre qué combinaciones no funcionan.</li>
+          <li><strong>Usa el archivo para practicar:</strong> si completas el puzzle del día y quieres más, los puzzles anteriores son excelentes para practicar sin presión.</li>
+          <li><strong>Consulta la guía completa:</strong> nuestra página de <a href="/como-jugar/">cómo jugar</a> tiene una explicación detallada con ejemplos.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>La comunidad de Palabras Conectadas</h2>
+        <p>Palabras Conectadas ha creado una comunidad creciente de entusiastas de los juegos de palabras en español. Los jugadores comparten sus resultados diariamente en redes sociales, discuten estrategias en foros y se desafían entre amigos y familiares. Esta dimensión social es una parte fundamental de la experiencia, transformando un pasatiempo solitario en una actividad compartida.</p>
+        <p>Ya sea que juegues en familia, con compañeros de trabajo o con amigos a distancia, Palabras Conectadas ofrece una forma única de conectar a través del lenguaje y la competencia amistosa.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>Preguntas frecuentes</h2>
+        <h3>¿Cada cuándo hay un puzzle nuevo?</h3>
+        <p>Cada día a las 00:00 (hora local) se publica un nuevo puzzle. Todos los jugadores alrededor del mundo ven la misma combinación de palabras, creando una experiencia compartida.</p>
+        <h3>¿Cuántos errores tengo?</h3>
+        <p>En modo Normal tienes 4 errores. En modo Difícil tienes 3 errores. Al agotarlos, el juego termina y se revelan las soluciones de todas las categorías.</p>
+        <h3>¿Puedo jugar en cualquier dispositivo?</h3>
+        <p>Sí. Palabras Conectadas funciona en cualquier navegador moderno, tanto en computadoras como en dispositivos móviles (iOS y Android). Además, puedes instalarlo como una aplicación web progresiva (PWA) en tu teléfono para acceder directamente desde la pantalla de inicio.</p>
+        <h3>¿Se guarda mi progreso?</h3>
+        <p>Si tienes un puzzle a medio resolver, tu progreso se guarda automáticamente en tu navegador y puedes retomarlo más tarde, incluso si cierras la página. Las estadísticas y rachas también se almacenan localmente, y opcionalmente puedes sincronizarlas en la nube.</p>
+        <h3>¿Cómo funciona la sincronización en la nube?</h3>
+        <p>La sincronización en la nube te permite mantener tus estadísticas y rachas incluso si borras los datos del navegador o cambias de dispositivo. Es opcional y utiliza un identificador anónimo para proteger tu privacidad.</p>
+        <h3>¿Hay algún costo?</h3>
+        <p>No. Palabras Conectadas es completamente gratuito. Todos los puzzles diarios, el archivo histórico y las funcionalidades están disponibles sin costo alguno.</p>
+        <p>Para más preguntas, visita nuestra <a href="/faq/">página de preguntas frecuentes</a>.</p>
+      </section>
+
+      <hr />
+
+      <footer style="text-align:center;padding:1rem 0;font-size:0.8rem;color:#999">
+        <p><strong>Palabras Conectadas</strong> &mdash; La Conexión del Día</p>
+        <p>Un juego diario de conexiones de palabras en español &bull; Nuevo puzzle cada día &bull; Gratuito para siempre</p>
+        <p style="margin-top:0.5rem">
+          <a href="/tips/" style="color:#666;text-decoration:underline">Consejos y trucos</a>
+          &nbsp;&bull;&nbsp;
+          <a href="/blog/" style="color:#666;text-decoration:underline">Blog</a>
+          &nbsp;&bull;&nbsp;
+          <a href="/about/" style="color:#666;text-decoration:underline">Acerca de</a>
+          &nbsp;&bull;&nbsp;
+          <a href="/como-jugar/" style="color:#666;text-decoration:underline">Cómo jugar</a>
+          &nbsp;&bull;&nbsp;
+          <a href="/faq/" style="color:#666;text-decoration:underline">FAQ</a>
+          &nbsp;&bull;&nbsp;
+          <a href="/privacy/" style="color:#666;text-decoration:underline">Privacidad</a>
+        </p>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // When React mounts, hide the duplicated SEO content to avoid visual clutter
+      // but keep it in the DOM for crawlers
+      window.addEventListener('DOMContentLoaded', function() {
+        // Give React a moment to mount
+        setTimeout(function() {
+          var root = document.getElementById('root');
+          var seoBottom = document.getElementById('seo-bottom');
+          var seoTop = document.getElementById('seo-top');
+          // Check if React actually rendered something
+          if (root && root.children.length > 0) {
+            if (seoBottom) seoBottom.style.display = 'none';
+            if (seoTop) seoTop.style.display = 'none';
+          }
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

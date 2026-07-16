@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Outer rounded square background (white) -->
+  <rect x="2" y="2" width="96" height="96" rx="18" fill="#ffffff"/>
+  <!-- Top-left quadrant (yellow) -->
+  <path d="M2 2h46v46H2Z" fill="#F9DF6D"/>
+  <!-- Top-right quadrant (green) -->
+  <path d="M52 2h46v46H52Z" fill="#A0C35A"/>
+  <!-- Bottom-left quadrant (blue) -->
+  <path d="M2 52h46v46H2Z" fill="#B0C4EF"/>
+  <!-- Bottom-right quadrant (purple) -->
+  <path d="M52 52h46v46H52Z" fill="#BA81C5"/>
+  <!-- White cross divider -->
+  <rect x="48" y="0" width="4" height="100" fill="#ffffff"/>
+  <rect x="0" y="48" width="100" height="4" fill="#ffffff"/>
+  <!-- Clip to rounded corners using a mask -->
+  <defs>
+    <clipPath id="rounded">
+      <rect x="2" y="2" width="96" height="96" rx="18"/>
+    </clipPath>
+  </defs>
+</svg>

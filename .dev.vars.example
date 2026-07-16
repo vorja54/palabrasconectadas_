@@ -1,0 +1,10 @@
+# Variables de entorno para desarrollo local
+# Copia este archivo a .dev.vars y completa los valores
+
+# API Key de Resend para el envío de emails del formulario de contacto
+# Consíguela en https://resend.com/api-keys
+RESEND_API_KEY=re_xxxxxxxxxxxx
+
+# Google Analytics 4 Measurement ID (se expone al frontend via VITE_)
+# Consíguela en https://analytics.google.com → Admin → Data Streams → web
+# VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX

@@ -1,0 +1,11 @@
+name = "laconexiondeldia"
+compatibility_date = "2026-06-22"
+pages_build_output_dir = "dist"
+
+# KV namespace para leaderboard, desafíos, push notifications y estadísticas sincronizadas
+[[kv_namespaces]]
+binding = "STATS"
+id = "c123450a7b9f4342afa0ab6274104e51"
+
+# Google Analytics - Configurar en Cloudflare Pages Dashboard o en .dev.vars:
+# VITE_GA_MEASUREMENT_ID = "G-XXXXXXXXXX"

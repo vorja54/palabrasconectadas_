@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/", "/about", "/blog", "/tips/*", "/como-jugar", "/faq", "/sitemap.xml", "/puzzle/*", "/api/*", "/privacy/*"],
+  "exclude": ["/assets/*", "/favicon.svg", "/robots.txt", "/manifest.webmanifest", "/og-image.png", "/icon-192x192.png", "/icon-512x512.png"]
+}
