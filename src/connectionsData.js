@@ -385,7 +385,7 @@ const JASON_PUZZLES = [
       {
         "name": "PAISES CON MONARQUIA",
         "words": [
-          "ESPANA",
+          "ESPAÑA",
           "INGLATERRA",
           "SUECIA",
           "JAPON"
@@ -1837,7 +1837,7 @@ const JASON_PUZZLES = [
         "words": [
           "MARGARITA",
           "MOJITO",
-          "PINA COLADA",
+          "PIÑA COLADA",
           "DAIQUIRI"
         ],
         "color": "blue"
@@ -3645,10 +3645,10 @@ const JASON_PUZZLES = [
       {
         "name": "PALABRAS CON 'Ñ'",
         "words": [
-          "ESPANA",
-          "ANO",
-          "MUNECA",
-          "PINA"
+          "ESPAÑA",
+          "AÑO",
+          "MUÑECA",
+          "PIÑA"
         ],
         "color": "purple"
       }
@@ -4480,7 +4480,7 @@ const JASON_PUZZLES = [
       {
         "name": "PAISES MEDITERRANEOS",
         "words": [
-          "ESPANA",
+          "ESPAÑA",
           "ITALIA",
           "GRECIA",
           "TURQUIA"
@@ -5637,7 +5637,7 @@ const JASON_PUZZLES = [
 ];
 
 const SPECIAL_PUZZLES = {
-"0101":{id:"special-0101",categories:[{name:"PROPOSITOS AÑO NUEVO",words:["EJERCICIO","DIETA","AHORRO","VIAJE"],color:"yellow"},{name:"TRADICIONES AÑO NUEVO",words:["UVA","CAMPANADA","BRINDIS","CORNETA"],color:"green"},{name:"MESES DEL AÑO",words:["ENERO","MARZO","JUNIO","DICIEMBRE"],color:"blue"},{name:"NUMEROS ROMANOS",words:["I","V","X","L"],color:"purple"}]},"1225":{id:"special-1225",categories:[{name:"NAVIDAD",words:["VILLANCICO","REGALO","ARBOL","ESTRELLA"],color:"yellow"},{name:"ADORNOS NAVIDAD",words:["ESFERA","GUIRNALDA","LUCES","BELEN"],color:"green"},{name:"POSTRES NAVIDAD",words:["TURRON","POLVORON","MAZAPAN","ROSCON"],color:"blue"},{name:"PERSONAJES NAVIDAD",words:["SANTA","RENO","DUENDE","ELFO"],color:"purple"}]},"1031":{id:"special-1031",categories:[{name:"HALLOWEEN",words:["CALABAZA","DISFRAZ","FANTASMA","DULCE"],color:"yellow"},{name:"MONSTRUOS",words:["VAMPIRO","ZOMBIE","LOBO","MOMIA"],color:"green"},{name:"COLORES OSCUROS",words:["NEGRO","MORADO","ROJO","GRIS"],color:"blue"},{name:"PELICULAS TERROR",words:["EL EXORCISTA","PSICOSIS","IT","EL RESPLANDOR"],color:"purple"}]},"0214":{id:"special-0214",categories:[{name:"AMOR Y AMISTAD",words:["CORAZON","FLORES","CHOCOLATE","CARTA"],color:"yellow"},{name:"PAREJA",words:["NOVIO","ESPOSO","COMPAÑERO","ALMA"],color:"green"},{name:"PALABRAS DULCES",words:["AMOR","BESO","ABRAZO","CARICIA"],color:"blue"},{name:"CANCIONES AMOR",words:["BOLERO","BALADA","RANCHERA","SONETO"],color:"purple"}]},"0704":{id:"special-0704",categories:[{name:"INDEPENDENCIA USA",words:["LIBERTAD","DECLARACION","BANDERA","FUEGOS"],color:"yellow"},{name:"SIMBOLOS USA",words:["AGUILA","ESTATUA","DOLAR","CASA BLANCA"],color:"green"},{name:"CIUDADES USA",words:["NUEVA YORK","LOS ANGELES","CHICAGO","MIAMI"],color:"blue"},{name:"INVENTOS USA",words:["AVION","BOMBILLA","INTERNET","TELEFONO"],color:"purple"}]},"0916":{id:"special-0916",categories:[{name:"INDEPENDENCIA MEXICO",words:["GRITO","CAMPANA","HIDALGO","INSURGENTE"],color:"yellow"},{name:"SIMBOLOS MEXICO",words:["AGUILA","SERPIENTE","NOPAL","TRICOLOR"],color:"green"},{name:"COMIDA MEXICANA",words:["TACO","TAMAL","POZOLE","MOLE"],color:"blue"},{name:"ARTE MEXICANO",words:["FRIDA","RIVERA","SIGUEIROS","KAHLO"],color:"purple"}]},"1206":{id:"special-1206",categories:[{name:"CONSTITUCION ESPAÑOLA",words:["CONSTITUCION","DEMOCRACIA","DERECHO","LEY"],color:"yellow"},{name:"SIMBOLOS ESPAÑA",words:["TORO","BAILAORA","SOLEAR","PAELLA"],color:"green"},{name:"REYES ESPAÑA",words:["FELIPE","LETICIA","JUAN CARLOS","SOFIA"],color:"blue"},{name:"COMUNIDADES",words:["ANDALUCIA","CATALUÑA","PAIS VASCO","GALICIA"],color:"purple"}]},"0520":{id:"special-0520",categories:[{name:"DIA DE LA INDEPENDENCIA",words:["CUBANO","PUERTORRIQUEÑO","DOMINICANO","LIBERTAD"],color:"yellow"},{name:"PRIMAVERA",words:["FLOR","SOL","MARIPOSA","ARCOIRIS"],color:"green"},{name:"JARDIN",words:["SEMILLA","TIERRA","AGUA","SOL"],color:"blue"},{name:"HERIDAS EMOCIONALES",words:["PENA","DUELO","PERDON","CICATRIZ"],color:"purple"}]},"0601":{id:"special-0601",categories:[{name:"VERANO",words:["PLAYA","SOL","CALOR","VACACIONES"],color:"yellow"},{name:"DEPORTES VERANO",words:["NATACION","SURF","BUCEO","VELA"],color:"green"},{name:"FRUTAS VERANO",words:["SANDIA","MELON","MANGO","PINA"],color:"blue"},{name:"ROPA VERANO",words:["SHORT","CAMISETA","SANDALIA","GORRA"],color:"purple"}]}
+"0101":{id:"special-0101",categories:[{name:"PROPOSITOS AÑO NUEVO",words:["EJERCICIO","DIETA","AHORRO","VIAJE"],color:"yellow"},{name:"TRADICIONES AÑO NUEVO",words:["UVA","CAMPANADA","BRINDIS","CORNETA"],color:"green"},{name:"MESES DEL AÑO",words:["ENERO","MARZO","JUNIO","DICIEMBRE"],color:"blue"},{name:"NUMEROS ROMANOS",words:["I","V","X","L"],color:"purple"}]},"1225":{id:"special-1225",categories:[{name:"NAVIDAD",words:["VILLANCICO","REGALO","ARBOL","ESTRELLA"],color:"yellow"},{name:"ADORNOS NAVIDAD",words:["ESFERA","GUIRNALDA","LUCES","BELEN"],color:"green"},{name:"POSTRES NAVIDAD",words:["TURRON","POLVORON","MAZAPAN","ROSCON"],color:"blue"},{name:"PERSONAJES NAVIDAD",words:["SANTA","RENO","DUENDE","ELFO"],color:"purple"}]},"1031":{id:"special-1031",categories:[{name:"HALLOWEEN",words:["CALABAZA","DISFRAZ","FANTASMA","DULCE"],color:"yellow"},{name:"MONSTRUOS",words:["VAMPIRO","ZOMBIE","LOBO","MOMIA"],color:"green"},{name:"COLORES OSCUROS",words:["NEGRO","MORADO","ROJO","GRIS"],color:"blue"},{name:"PELICULAS TERROR",words:["EL EXORCISTA","PSICOSIS","IT","EL RESPLANDOR"],color:"purple"}]},"0214":{id:"special-0214",categories:[{name:"AMOR Y AMISTAD",words:["CORAZON","FLORES","CHOCOLATE","CARTA"],color:"yellow"},{name:"PAREJA",words:["NOVIO","ESPOSO","COMPAÑERO","ALMA"],color:"green"},{name:"PALABRAS DULCES",words:["AMOR","BESO","ABRAZO","CARICIA"],color:"blue"},{name:"CANCIONES AMOR",words:["BOLERO","BALADA","RANCHERA","SONETO"],color:"purple"}]},"0704":{id:"special-0704",categories:[{name:"INDEPENDENCIA USA",words:["LIBERTAD","DECLARACION","BANDERA","FUEGOS"],color:"yellow"},{name:"SIMBOLOS USA",words:["AGUILA","ESTATUA","DOLAR","CASA BLANCA"],color:"green"},{name:"CIUDADES USA",words:["NUEVA YORK","LOS ANGELES","CHICAGO","MIAMI"],color:"blue"},{name:"INVENTOS USA",words:["AVION","BOMBILLA","INTERNET","TELEFONO"],color:"purple"}]},"0916":{id:"special-0916",categories:[{name:"INDEPENDENCIA MEXICO",words:["GRITO","CAMPANA","HIDALGO","INSURGENTE"],color:"yellow"},{name:"SIMBOLOS MEXICO",words:["AGUILA","SERPIENTE","NOPAL","TRICOLOR"],color:"green"},{name:"COMIDA MEXICANA",words:["TACO","TAMAL","POZOLE","MOLE"],color:"blue"},{name:"ARTE MEXICANO",words:["FRIDA","RIVERA","SIGUEIROS","KAHLO"],color:"purple"}]},"1206":{id:"special-1206",categories:[{name:"CONSTITUCION ESPAÑOLA",words:["CONSTITUCION","DEMOCRACIA","DERECHO","LEY"],color:"yellow"},{name:"SIMBOLOS ESPAÑA",words:["TORO","BAILAORA","SOLEAR","PAELLA"],color:"green"},{name:"REYES ESPAÑA",words:["FELIPE","LETICIA","JUAN CARLOS","SOFIA"],color:"blue"},{name:"COMUNIDADES",words:["ANDALUCIA","CATALUÑA","PAIS VASCO","GALICIA"],color:"purple"}]},"0520":{id:"special-0520",categories:[{name:"DIA DE LA INDEPENDENCIA",words:["CUBANO","PUERTORRIQUEÑO","DOMINICANO","LIBERTAD"],color:"yellow"},{name:"PRIMAVERA",words:["FLOR","SOL","MARIPOSA","ARCOIRIS"],color:"green"},{name:"JARDIN",words:["SEMILLA","TIERRA","AGUA","SOL"],color:"blue"},{name:"HERIDAS EMOCIONALES",words:["PENA","DUELO","PERDON","CICATRIZ"],color:"purple"}]},"0601":{id:"special-0601",categories:[{name:"VERANO",words:["PLAYA","SOL","CALOR","VACACIONES"],color:"yellow"},{name:"DEPORTES VERANO",words:["NATACION","SURF","BUCEO","VELA"],color:"green"},{name:"FRUTAS VERANO",words:["SANDIA","MELON","MANGO","PIÑA"],color:"blue"},{name:"ROPA VERANO",words:["SHORT","CAMISETA","SANDALIA","GORRA"],color:"purple"}]}
 };
 
 const MUNDIAL_PUZZLES = [
