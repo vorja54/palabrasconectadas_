@@ -16,10 +16,6 @@ function dateSeed(y, m, d) {
   return y * 10000 + (m + 1) * 100 + d;
 }
 
-function firstDateSeed() {
-  return dateSeed(FIRST_YEAR, FIRST_MONTH, FIRST_DAY);
-}
-
 export default function ArchiveModal({ show, onClose }) {
   const today = useMemo(() => new Date(), []);
   const [viewMonth, setViewMonth] = useState(today.getMonth());
@@ -28,7 +24,7 @@ export default function ArchiveModal({ show, onClose }) {
     const normal = getPlayedDatesSet('normal');
     const jason = getPlayedDatesSet('jason');
     return new Set([...normal, ...jason]);
-  }, [show]);
+  }, []);
 
   if (!show) return null;
 
@@ -77,7 +73,7 @@ export default function ArchiveModal({ show, onClose }) {
     const isPlayed = playedDates.has(seed);
     // Today goes to the normal game (with save, hasPlayed check)
     if (seed === todaySeed) {
-      window.location.href = '/';
+      window.location.assign('/');
       return;
     }
     // Already played — do nothing
@@ -85,11 +81,11 @@ export default function ArchiveModal({ show, onClose }) {
     const y = viewYear;
     const m = String(viewMonth + 1).padStart(2, '0');
     const d = String(day).padStart(2, '0');
-    window.location.href = `/?date=${y}-${m}-${d}`;
+    window.location.assign(`/?date=${y}-${m}-${d}`);
   };
 
   const goToToday = () => {
-    window.location.href = '/';
+    window.location.assign('/');
   };
 
   const dayClass = (day) => {

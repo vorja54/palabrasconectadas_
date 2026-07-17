@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import {
   getStats,
   saveGameResult,
@@ -178,7 +178,7 @@ describe('saveGameResult', () => {
   });
 
   it('does not double-count same day', () => {
-    const r1 = saveGameResult(2, true, 90);
+    saveGameResult(2, true, 90);
     const r2 = saveGameResult(1, true, 60);
     expect(r2.gamesPlayed).toBe(1);
     expect(r2.gamesWon).toBe(1);

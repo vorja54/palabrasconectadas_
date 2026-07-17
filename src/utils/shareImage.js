@@ -1,4 +1,4 @@
-export function generateResultImage(results, puzzleDate) {
+export function generateResultImage(results) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const W = 720;
@@ -156,12 +156,6 @@ export function generateResultImage(results, puzzleDate) {
   ctx.fillText('laconexiondeldia.com', W / 2, H - 44);
 
   return canvas;
-}
-
-function fmtTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${m}:${String(sec).padStart(2, '0')}`;
 }
 
 export function downloadResultImage(results, puzzleDate) {

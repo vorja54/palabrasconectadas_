@@ -3,7 +3,7 @@ import CategoryRow from './CategoryRow';
 import AdBanner from './AdBanner';
 
 export default function GamePlayArea({
-  isPractice, gameMode, solvedCategories, shuffledWords, selectedIds, mistakeShake, animatingIds,
+  solvedCategories, shuffledWords, selectedIds, mistakeShake, animatingIds,
   onSelectWord, timerStarted, elapsed, mistakes, MAX_MISTAKES, gameOver,
   handleSubmit, handleShuffle, handleDeselectAll, fontSize, staggerKey,
   }) {

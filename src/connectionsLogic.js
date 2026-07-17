@@ -1,7 +1,6 @@
 import { getDailyPuzzle, getWeeklyPracticePuzzle, getActiveSpecial } from './connectionsData.js';
 import { syncStatsToCloud } from './utils/statsSync.js';
 
-const MAX_MISTAKES = 4;
 const STATS_KEY = 'conexion-deldia-stats';
 const STATS_KEY_JASON = 'conexion-deldia-stats-jason';
 const STATS_KEY_SPECIAL = 'conexion-deldia-stats-special';
@@ -220,7 +219,7 @@ export function getShareText(solvedCategories, mistakes, won, totalTime, maxMist
   return lines.join('\n');
 }
 
-export function getShareTextForTwitter(solvedCategories, mistakes, won, totalTime, maxMistakes = 4, puzzleDate, puzzleCategories) {
+export function getShareTextForTwitter(solvedCategories, mistakes, won, totalTime, maxMistakes = 4, puzzleDate) {
   const dateObj = puzzleDate || new Date();
   const dateStr = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
   const url = 'laconexiondeldia.com';

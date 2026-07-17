@@ -1,8 +1,6 @@
 // Spanish syllabic hyphenation per RAE rules
 // Inserts soft hyphens (\u00AD) at syllable boundaries for words > 8 chars.
 
-const VOW = '[aeiouáéíóúüAEIOUÁÉÍÓÚÜ]';
-const CON = '[bcdfghjklmnñpqrstvwxyzBCDFGHJKLMNÑPQRSTVWXYZ]';
 
 // Indivisible consonant groups: consonant + l/r, ch, ll, rr
 const IS_INDIVISIBLE = new Set([

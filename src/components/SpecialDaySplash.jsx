@@ -76,7 +76,7 @@ export default function SpecialDaySplash() {
   const handleDismiss = () => {
     try {
       localStorage.setItem('pc-special-splash-dismissed', getSpecialDayKey());
-    } catch {}
+    } catch { /* ignore */ }
     setDismissed(true);
   };
 

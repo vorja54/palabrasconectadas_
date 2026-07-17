@@ -16,10 +16,6 @@ const REGIONAL_MAP = {
   },
 };
 
-const REGIONS = [
-  { code: 'es-ES', label: 'España' },
-];
-
 function detectRegionFromLang(lang) {
   if (lang.startsWith('es')) return 'es-ES';
   return 'default';

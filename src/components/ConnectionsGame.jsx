@@ -16,12 +16,8 @@ import {
   saveGameResult,
   hasPlayedToday,
   shuffleArray,
-  getShareText,
-  getAllShareText,
-  getShareTextForTwitter,
   getAllShareTextForTwitter,
   getArchiveDate,
-  getLastGameResult,
   getWeeklyPracticePuzzle,
   getActiveSpecial,
   getDateSeed,
@@ -64,7 +60,7 @@ export default function ConnectionsGame() {
   const [showArchive, setShowArchive] = useState(false);
   const [showChallenge, setShowChallenge] = useState(false);
   const [showContact, setShowContact] = useState(false);
-  const [challengeCode, setChallengeCode] = useState(() => getChallengeCodeFromURL());
+  const [challengeCode] = useState(() => getChallengeCodeFromURL());
   const [shuffledWords, setShuffledWords] = useState([]);
   const [staggerKey, setStaggerKey] = useState(0);
   const [selectedIds, setSelectedIds] = useState(new Set());
@@ -84,44 +80,12 @@ export default function ConnectionsGame() {
   const timerStartedRef = useRef(false);
   const [timerStarted, setTimerStarted] = useState(false);
   const selectedIdsRef = useRef(new Set());
+  const [now] = useState(() => Date.now());
 
   // Keep ref in sync for save-on-exit
   useEffect(() => {
     selectedIdsRef.current = selectedIds;
   }, [selectedIds]);
-
-  // In-progress game state persistence
-  const isSaveable = !isArchive && !isPractice;
-  function getGameStateKey(mode) {
-    return `pc-game-state-${mode}`;
-  }
-  function saveInProgressState() {
-    if (!isSaveable || gameOver || won || !puzzle) return;
-    // Don't save empty state (game hasn't started)
-    if (mistakes === 0 && solvedCategories.length === 0 && elapsed === 0) return;
-    try {
-      localStorage.setItem(getGameStateKey(currentMode), JSON.stringify({
-        puzzleDateSeed: getDateSeed(puzzle.date || new Date()),
-        solvedCategories,
-        mistakes,
-        shuffledWords,
-        elapsed,
-        timerStarted,
-      }));
-    } catch {}
-  }
-  function loadGameState(mode) {
-    try {
-      const saved = localStorage.getItem(getGameStateKey(mode));
-      if (!saved) return null;
-      const parsed = JSON.parse(saved);
-      parsed.selectedIds = new Set(parsed.selectedIds || []);
-      return parsed;
-    } catch { return null; }
-  }
-  function clearGameState(mode) {
-    localStorage.removeItem(getGameStateKey(mode));
-  }
 
   const [statsVersion, setStatsVersion] = useState(0);
   const [lastGameResult, setLastGameResult] = useState(() => {
@@ -147,6 +111,39 @@ export default function ConnectionsGame() {
     }
     return 'normal';
   });
+
+  // In-progress game state persistence
+  const isSaveable = !isArchive && !isPractice;
+  function getGameStateKey(mode) {
+    return `pc-game-state-${mode}`;
+  }
+  const saveInProgressState = useCallback(() => {
+    if (!isSaveable || gameOver || won || !puzzle) return;
+    // Don't save empty state (game hasn't started)
+    if (mistakes === 0 && solvedCategories.length === 0 && elapsed === 0) return;
+    try {
+      localStorage.setItem(getGameStateKey(gameMode), JSON.stringify({
+        puzzleDateSeed: getDateSeed(puzzle.date || new Date()),
+        solvedCategories,
+        mistakes,
+        shuffledWords,
+        elapsed,
+        timerStarted,
+      }));
+    } catch { /* ignore */ }
+  }, [isSaveable, gameOver, won, puzzle, mistakes, solvedCategories, elapsed, timerStarted, gameMode, shuffledWords]);
+  const loadGameState = useCallback((mode) => {
+    try {
+      const saved = localStorage.getItem(getGameStateKey(mode));
+      if (!saved) return null;
+      const parsed = JSON.parse(saved);
+      parsed.selectedIds = new Set(parsed.selectedIds || []);
+      return parsed;
+    } catch { return null; }
+  }, []);
+  const clearGameState = useCallback((mode) => {
+    localStorage.removeItem(getGameStateKey(mode));
+  }, []);
 
   const switchMode = (newMode) => {
     if (newMode === gameMode) return;
@@ -219,11 +216,13 @@ export default function ConnectionsGame() {
 
   useEffect(() => {
     if (challengeCode) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowChallenge(true);
     }
   }, [challengeCode]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPuzzle(getPuzzle(null, gameMode));
     setSelectedIds(new Set());
     setMistakes(0);
@@ -242,6 +241,7 @@ export default function ConnectionsGame() {
       const puzzleDateSeed = getDateSeed(puzzle.date || new Date());
       const saved = loadGameState(currentMode);
       if (saved && saved.puzzleDateSeed === puzzleDateSeed && !saved.gameOver) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSolvedCategories(saved.solvedCategories || []);
         setMistakes(saved.mistakes || 0);
         setShuffledWords(saved.shuffledWords || []);
@@ -286,7 +286,7 @@ export default function ConnectionsGame() {
 
     setShuffledWords(shuffleArray(items));
     setStaggerKey(k => k + 1);
-  }, [puzzle, gameMode]);
+  }, [puzzle, gameMode, currentMode, isSaveable, loadGameState, clearGameState]);
 
   const showToast = useCallback((message) => {
     setToast({ show: true, message });
@@ -359,7 +359,7 @@ export default function ConnectionsGame() {
             { ...category, categoryIndex: catIdx, solvedAt: currentElapsed },
           ];
           const resultData = {
-            puzzleDate: puzzle.date?.getTime ? puzzle.date.getTime() : Date.now(),
+            puzzleDate: puzzle.date?.getTime ? puzzle.date.getTime() : now,
             time: currentElapsed,
             mistakes,
             won: true,
@@ -396,7 +396,7 @@ export default function ConnectionsGame() {
         if (soundEnabled) playLose();
         if (!isPractice) saveGameResult(MAX_MISTAKES, false, undefined, currentMode, isArchive ? puzzle.date : undefined);
         const resultData = {
-          puzzleDate: puzzle.date?.getTime ? puzzle.date.getTime() : Date.now(),
+          puzzleDate: puzzle.date?.getTime ? puzzle.date.getTime() : now,
           time: elapsedRef.current || 0,
           mistakes: MAX_MISTAKES,
           won: false,
@@ -449,13 +449,6 @@ export default function ConnectionsGame() {
     return results;
   };
 
-  const puzzleUrlForShare = (pd) => {
-    if (pd) {
-      return `https://laconexiondeldia.com/puzzle/${pd.getFullYear()}-${String(pd.getMonth() + 1).padStart(2, '0')}-${String(pd.getDate()).padStart(2, '0')}`;
-    }
-    return 'https://laconexiondeldia.com';
-  };
-
   const getPuzzleDateForShare = () => {
     if (isArchive && puzzle && puzzle.date) return puzzle.date;
     return null;
@@ -494,39 +487,6 @@ export default function ConnectionsGame() {
     trackEvent('share_twitter', { mode: 'all' });
   };
 
-  const shareResult = () => {
-    const effectiveWon = hasPlayed ? getLastGameResult(currentMode).won : won;
-    const effectiveMistakes = hasPlayed ? (getLastGameResult(currentMode).mistakes ?? mistakes) : mistakes;
-    const pd = getPuzzleDateForShare();
-    const text = getShareTextForTwitter(solvedCategories, effectiveMistakes, effectiveWon, elapsed, MAX_MISTAKES, pd, puzzle.categories);
-    trackEvent('share_result', { mode: currentMode, won: effectiveWon ? 'yes' : 'no' });
-    if (navigator.share) {
-      navigator.share({ text }).catch(() => {});
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(() => showToast('¡Resultado copiado!'));
-    }
-  };
-
-  const shareWhatsApp = () => {
-    const effectiveWon = hasPlayed ? getLastGameResult(currentMode).won : won;
-    const effectiveMistakes = hasPlayed ? (getLastGameResult(currentMode).mistakes ?? mistakes) : mistakes;
-    const pd = getPuzzleDateForShare();
-    const text = getShareTextForTwitter(solvedCategories, effectiveMistakes, effectiveWon, elapsed, MAX_MISTAKES, pd, puzzle.categories);
-    const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/?text=${encoded}`, '_blank');
-    trackEvent('share_whatsapp', { mode: currentMode });
-  };
-
-  const shareTwitter = () => {
-    const effectiveWon = hasPlayed ? getLastGameResult(currentMode).won : won;
-    const effectiveMistakes = hasPlayed ? (getLastGameResult(currentMode).mistakes ?? mistakes) : mistakes;
-    const pd = getPuzzleDateForShare();
-    const text = getShareTextForTwitter(solvedCategories, effectiveMistakes, effectiveWon, elapsed, MAX_MISTAKES, pd, puzzle.categories);
-    const encoded = encodeURIComponent(text);
-    window.open(`https://twitter.com/intent/tweet?text=${encoded}`, '_blank');
-    trackEvent('share_twitter', { mode: currentMode });
-  };
-
   const shareInstagram = () => {
     const results = loadAllResults();
     if (Object.keys(results).length === 0) return;
@@ -553,19 +513,25 @@ export default function ConnectionsGame() {
   }, [elapsed]);
 
   // Keyboard shortcuts
+  const handleSubmitRef = useRef(handleSubmit);
+  const handleDeselectAllRef = useRef(handleDeselectAll);
+  useEffect(() => {
+    handleSubmitRef.current = handleSubmit;
+    handleDeselectAllRef.current = handleDeselectAll;
+  });
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Enter') handleSubmit();
-      else if (e.key === 'Backspace') handleDeselectAll();
+      if (e.key === 'Enter') handleSubmitRef.current();
+      else if (e.key === 'Backspace') handleDeselectAllRef.current();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleSubmit, handleDeselectAll]);
+  }, []);
 
   // Auto-save in-progress game state on meaningful changes
   useEffect(() => {
     saveInProgressState();
-  }, [solvedCategories, mistakes, shuffledWords, elapsed, timerStarted]);
+  }, [solvedCategories, mistakes, shuffledWords, elapsed, timerStarted, saveInProgressState]);
 
   // Save full game state when the user leaves the tab/app (visibilitychange + pagehide for mobile)
   useEffect(() => {
@@ -583,7 +549,7 @@ export default function ConnectionsGame() {
             state.selectedIds = [...sel];
             localStorage.setItem(key, JSON.stringify(state));
           }
-        } catch {}
+        } catch { /* ignore */ }
       }
     };
     document.addEventListener('visibilitychange', saveStateOnExit);
@@ -592,14 +558,14 @@ export default function ConnectionsGame() {
       document.removeEventListener('visibilitychange', saveStateOnExit);
       window.removeEventListener('pagehide', saveStateOnExit);
     };
-  }, [currentMode, isArchive, isPractice, gameOver, won, solvedCategories, mistakes, shuffledWords, elapsed, timerStarted]);
+  }, [currentMode, isArchive, isPractice, gameOver, won, solvedCategories, mistakes, shuffledWords, elapsed, timerStarted, isSaveable, saveInProgressState]);
 
   // Periodic save every 10s while game is in progress (mobile fallback)
   useEffect(() => {
     if (!isSaveable || gameOver || won) return;
     const interval = setInterval(saveInProgressState, 10000);
     return () => clearInterval(interval);
-  }, [isSaveable, gameOver, won, currentMode, solvedCategories, mistakes, shuffledWords, elapsed, timerStarted]);
+  }, [isSaveable, gameOver, won, currentMode, solvedCategories, mistakes, shuffledWords, elapsed, timerStarted, saveInProgressState]);
 
   const isSpecialDay = puzzle && puzzle.id && String(puzzle.id).startsWith('special-');
 
@@ -871,7 +837,7 @@ export default function ConnectionsGame() {
           onClose={() => setShowChallenge(false)}
           onModeSwitch={(m) => { switchMode(m); setShowChallenge(false); }}
           gameResult={won || mistakes >= MAX_MISTAKES ? {
-            puzzleDate: puzzle.date?.getTime ? puzzle.date.getTime() : Date.now(),
+            puzzleDate: puzzle.date?.getTime ? puzzle.date.getTime() : now,
             time: elapsed,
             mistakes,
             won,

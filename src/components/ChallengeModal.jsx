@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getDisplayName, createChallenge, resolveChallenge, fetchChallenge } from '../utils/statsSync';
+import { useState, useEffect, useCallback } from 'react';
+import { createChallenge, resolveChallenge, fetchChallenge } from '../utils/statsSync';
 
 const categoryColors = {
   yellow: '#F9DF6D',
@@ -15,7 +15,7 @@ function fmtTime(s) {
   return `${m}:${String(sec).padStart(2, '0')}`;
 }
 
-function PlayerResult({ player, label, isWinner }) {
+function PlayerResult({ player, isWinner }) {
   if (!player) return null;
   return (
     <div className={`rounded p-3 ${isWinner ? 'ring-2 ring-green-500' : ''}`}>
@@ -73,23 +73,8 @@ export default function ChallengeModal({ show, onClose, gameResult, challengeCod
   const [challenge, setChallenge] = useState(null);
   const [challengeCode_State, setChallengeCode] = useState('');
   const [error, setError] = useState('');
-  const myName = getDisplayName();
 
-  // Reset when modal opens
-  useEffect(() => {
-    if (!show) return;
-    if (challengeCode) {
-      // Viewing an existing challenge
-      setStep('loading');
-      loadChallenge(challengeCode);
-    } else if (gameResult) {
-      setStep('menu');
-      setChallengeCode('');
-      setError('');
-    }
-  }, [show, challengeCode, gameResult]);
-
-  const loadChallenge = async (code) => {
+  const loadChallenge = useCallback(async (code) => {
     const data = await fetchChallenge(code);
     if (data) {
       setChallenge(data);
@@ -106,7 +91,22 @@ export default function ChallengeModal({ show, onClose, gameResult, challengeCod
       setError('Desafío no encontrado');
       setStep('menu');
     }
-  };
+  }, [onModeSwitch]);
+
+  // Reset when modal opens
+  useEffect(() => {
+    if (!show) return;
+    if (challengeCode) {
+      // Viewing an existing challenge
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStep('loading');
+      loadChallenge(challengeCode);
+    } else if (gameResult) {
+      setStep('menu');
+      setChallengeCode('');
+      setError('');
+    }
+  }, [show, challengeCode, gameResult, loadChallenge]);
 
   const handleCreate = async () => {
     if (!gameResult) return;

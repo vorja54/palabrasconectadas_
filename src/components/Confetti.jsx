@@ -7,6 +7,7 @@ export default function Confetti({ active }) {
 
   useEffect(() => {
     if (!active) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPieces([]);
       return;
     }
@@ -18,6 +19,7 @@ export default function Confetti({ active }) {
       delay: `${Math.random() * 0.5}s`,
       size: `${Math.random() * 8 + 6}px`,
       rotation: `${Math.random() * 360}deg`,
+      borderRadius: Math.random() > 0.5 ? '50%' : '2px',
     }));
 
     setPieces(newPieces);
@@ -44,7 +46,7 @@ export default function Confetti({ active }) {
             height: p.size,
             animationDelay: p.delay,
             transform: `rotate(${p.rotation})`,
-            borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+            borderRadius: p.borderRadius,
           }}
         />
       ))}

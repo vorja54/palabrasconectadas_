@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const VAPID_PUBLIC_KEY = 'BBoTCQRG1YOMQy4kuYsLx5-jvO0yq28ExCDsZHZVMGcoyWuDp0YjMXbh8ox8_Kptd3zgqFdtEf-8xKLOtOI4cok';
 
@@ -17,8 +17,28 @@ export default function PushSubscribe() {
   const [status, setStatus] = useState('loading'); // loading | unsupported | denied | prompt | subscribed
   const [dismissed, setDismissed] = useState(() => localStorage.getItem('pc-push-dismissed') === 'true');
 
+  const subscribe = useCallback(async (reg) => {
+    try {
+      const sub = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+      });
+      // Send to server
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subscription: sub.toJSON() }),
+      });
+      setStatus('subscribed');
+    } catch (err) {
+      console.warn('Push subscription failed:', err);
+      setStatus('prompt');
+    }
+  }, []);
+
   useEffect(() => {
     if (!('serviceWorker' in navigator && 'PushManager' in window)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus('unsupported');
       return;
     }
@@ -36,26 +56,7 @@ export default function PushSubscribe() {
         }
       });
     });
-  }, []);
-
-  const subscribe = async (reg) => {
-    try {
-      const sub = await reg.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
-      });
-      // Send to server
-      await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscription: sub.toJSON() }),
-      });
-      setStatus('subscribed');
-    } catch (err) {
-      console.warn('Push subscription failed:', err);
-      setStatus('prompt');
-    }
-  };
+  }, [subscribe]);
 
   const handleSubscribe = async () => {
     const permission = await Notification.requestPermission();
