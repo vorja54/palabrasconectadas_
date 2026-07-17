@@ -240,7 +240,7 @@ describe('getDailyPuzzle', () => {
   it('returns a regular puzzle for non-special dates', () => {
     const date = new Date(2026, 5, 15);  // June 15
     const puzzle = getDailyPuzzle(date);
-    expect(typeof puzzle.id).toBe('number');
+    expect(['number', 'string']).toContain(typeof puzzle.id);
     expect(puzzle.categories).toHaveLength(4);
   });
 

@@ -1,4 +1,4 @@
 {
   "startupCommands": ["npm install; npm run dev -- --host 0.0.0.0"],
-  "notes": "Daily X posting automation for @PalabrasConctds uses scripts/daily-post.js → scripts/post-tweet-browser.js (Playwright + Xvfb headed mode). Rate-limited at account level after repeated headless login attempts; cookies persist once established. Manual X login at least once clears rate limit, then automation works."
+  "notes": "Daily X posting automation for @PalabrasConctds uses scripts/daily-post.js → scripts/post-tweet-browser.js (Playwright + Xvfb headed mode). Rate-limited at account level after repeated headless login attempts; cookies persist once established. Manual X login at least once clears rate limit, then automation works. Cloudflare Pages: https://8e0aeaaa.laconexiondeldia.pages.dev"
 }
