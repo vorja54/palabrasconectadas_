@@ -6098,7 +6098,7 @@ export function getDailyPuzzle(date = new Date(), mode = 'normal') {
 // Returns true if today is within the Mundial 2026 date range
 export function isMundialActive(date = new Date()) {
   const start = new Date(date.getFullYear(), MUNDIAL_START.month - 1, MUNDIAL_START.day);
-  const end = new Date(date.getFullYear(), MUNDIAL_END.month - 1, MUNDIAL_END.day);
+  const end = new Date(date.getFullYear(), MUNDIAL_END.month - 1, MUNDIAL_END.day, 23, 59, 59, 999);
   return date >= start && date <= end;
 }
 
