@@ -6090,8 +6090,22 @@ export function getDailyPuzzle(date = new Date(), mode = 'normal') {
   const puzzlePool = mode === 'jason' ? JASON_PUZZLES : [...PUZZLES, ...NEW_PUZZLES];
   const daysSince = getDaysSince(date);
   const cycle = Math.floor(daysSince / puzzlePool.length);
-  const indexInCycle = daysSince % puzzlePool.length;
+  let indexInCycle = daysSince % puzzlePool.length;
   const shuffledPool = shuffleByCycle(puzzlePool, cycle);
+
+  // Modo Dificil: evitar que el puzzle comparta palabras con el Normal del mismo dia.
+  // Si colisiona, saltar de 7 en 7 posiciones (determinista) hasta encontrar uno limpio.
+  if (mode === 'jason') {
+    const normalPuzzle = getDailyPuzzle(date, 'normal');
+    const normalWords = new Set(normalPuzzle.categories.flatMap((c) => c.words));
+    const collides = (p) => p.categories.some((c) => c.words.some((w) => normalWords.has(w)));
+    let attempts = 0;
+    while (collides(shuffledPool[indexInCycle]) && attempts < shuffledPool.length) {
+      indexInCycle = (indexInCycle + 7) % shuffledPool.length;
+      attempts++;
+    }
+  }
+
   return { ...shuffledPool[indexInCycle], date };
 }
 
