@@ -240,7 +240,30 @@ export default function ConnectionsGame() {
     if (isSaveable) {
       const puzzleDateSeed = getDateSeed(puzzle.date || new Date());
       const saved = loadGameState(currentMode);
-      if (saved && saved.puzzleDateSeed === puzzleDateSeed && !saved.gameOver) {
+
+      // Validar que el estado guardado es coherente con el puzzle actual.
+      // Protege contra estados corruptos creados por versiones antiguas de la app
+      // (p.ej. una PWA con service worker desactualizado tras un deploy).
+      const isValidSavedState = (s) => {
+        if (!s || !Array.isArray(s.shuffledWords) || !Array.isArray(s.solvedCategories)) return false;
+        const expectedTotal = 16 + (currentMode === 'jason' ? 8 : 4);
+        if (s.solvedCategories.length * 4 + s.shuffledWords.length !== expectedTotal) return false;
+        // Cada ficha del tablero debe pertenecer al puzzle actual o ser señuelo
+        for (const item of s.shuffledWords) {
+          if (!item || typeof item.word !== 'string') return false;
+          if (item.categoryIndex === -1) continue; // señuelo
+          const cat = puzzle.categories[item.categoryIndex];
+          if (!cat || !cat.words.includes(item.word)) return false;
+        }
+        // Cada categoría resuelta debe existir en el puzzle actual
+        for (const sc of s.solvedCategories) {
+          const cat = puzzle.categories[sc.categoryIndex];
+          if (!cat || cat.name !== sc.name) return false;
+        }
+        return true;
+      };
+
+      if (saved && saved.puzzleDateSeed === puzzleDateSeed && !saved.gameOver && isValidSavedState(saved)) {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setSolvedCategories(saved.solvedCategories || []);
         setMistakes(saved.mistakes || 0);
@@ -437,12 +460,25 @@ export default function ConnectionsGame() {
     } catch { return null; }
   };
 
+  const isSameDay = (timestamp, refDate) => {
+    if (!timestamp) return false;
+    const d = new Date(timestamp);
+    return (
+      d.getFullYear() === refDate.getFullYear() &&
+      d.getMonth() === refDate.getMonth() &&
+      d.getDate() === refDate.getDate()
+    );
+  };
+
   const loadAllResults = () => {
     const results = {};
+    // Solo incluir resultados del dia que se esta compartiendo
+    // (evita que un resultado antiguo, p.ej. del Mundial, se cuele al dia siguiente)
+    const refDate = getPuzzleDateForShare() || new Date();
     const modes = ['normal', 'jason', 'special'];
     for (const mode of modes) {
       const data = loadResultByMode(mode);
-      if (data && data.won !== undefined) {
+      if (data && data.won !== undefined && isSameDay(data.puzzleDate, refDate)) {
         results[mode] = data;
       }
     }
