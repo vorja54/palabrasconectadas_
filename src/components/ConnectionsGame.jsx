@@ -349,8 +349,10 @@ export default function ConnectionsGame() {
       categoryCounts[item.categoryIndex] = (categoryCounts[item.categoryIndex] || 0) + 1;
     }
 
+    // Los señuelos comparten categoryIndex -1: cuatro señuelos NO son una categoria.
+    // Solo cuentan los indices >= 0 que existan realmente en el puzzle.
     const matchIdx = Object.entries(categoryCounts).find(
-      ([, count]) => count === 4
+      ([idx, count]) => count === 4 && Number(idx) >= 0 && puzzle.categories[Number(idx)]
     );
 
     if (matchIdx) {
