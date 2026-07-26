@@ -4,6 +4,7 @@ import { syncStatsToCloud } from './utils/statsSync.js';
 const STATS_KEY = 'conexion-deldia-stats';
 const STATS_KEY_JASON = 'conexion-deldia-stats-jason';
 const STATS_KEY_SPECIAL = 'conexion-deldia-stats-special';
+const STATS_KEY_DEPORTES = 'conexion-deldia-stats-deportes';
 const isTestMode = () => typeof window !== 'undefined' && window.location.search.includes('test');
 const getArchiveDate = () => {
   if (typeof window === 'undefined') return null;
@@ -51,6 +52,7 @@ export function getPuzzle(date, mode = 'normal') {
 function getStatsKey(mode) {
   if (mode === 'jason') return STATS_KEY_JASON;
   if (mode === 'special') return STATS_KEY_SPECIAL;
+  if (mode === 'deportes') return STATS_KEY_DEPORTES;
   return STATS_KEY;
 }
 
