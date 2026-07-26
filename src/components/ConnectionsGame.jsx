@@ -478,7 +478,7 @@ export default function ConnectionsGame() {
     // Solo incluir resultados del dia que se esta compartiendo
     // (evita que un resultado antiguo, p.ej. del Mundial, se cuele al dia siguiente)
     const refDate = getPuzzleDateForShare() || new Date();
-    const modes = ['normal', 'jason', 'special'];
+    const modes = ['normal', 'jason', 'deportes', 'special'];
     for (const mode of modes) {
       const data = loadResultByMode(mode);
       if (data && data.won !== undefined && isSameDay(data.puzzleDate, refDate)) {
