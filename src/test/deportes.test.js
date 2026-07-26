@@ -65,3 +65,28 @@ describe('Modo Deportes', () => {
     expect(vistos.size).toBeGreaterThan(100);
   });
 });
+
+import { getAllShareTextForTwitter, getAllShareText } from '../connectionsLogic.js';
+
+describe('Modo Deportes en compartir', () => {
+  const results = {
+    normal:   { won: true, mistakes: 1, time: 95,  puzzleDate: Date.now(), solvedCategories: [] },
+    deportes: { won: true, mistakes: 0, time: 72,  puzzleDate: Date.now(), solvedCategories: [] },
+  };
+
+  it('el texto de WhatsApp/Twitter incluye la línea de Deportes', () => {
+    const text = getAllShareTextForTwitter(results, new Date());
+    expect(text).toContain('Deportes');
+    expect(text).toContain('🏅');
+  });
+
+  it('el texto detallado incluye Deportes', () => {
+    const text = getAllShareText(results, new Date());
+    expect(text).toContain('Deportes');
+  });
+
+  it('respeta el orden: Normal antes que Deportes', () => {
+    const text = getAllShareTextForTwitter(results, new Date());
+    expect(text.indexOf('Normal')).toBeLessThan(text.indexOf('Deportes'));
+  });
+});
