@@ -248,7 +248,7 @@ export function getAllShareTextForTwitter(results, puzzleDate) {
   const dateStr = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
   const url = 'laconexiondeldia.com';
 
-  const order = ['normal', 'jason', 'special'];
+  const order = ['normal', 'jason', 'deportes', 'special'];
   const played = order.filter(
     (mode) => results[mode] && results[mode].won !== undefined
   );
@@ -282,6 +282,7 @@ const MODE_CONFIG = {
   normal: { icon: '🔗', label: 'Normal', maxMistakes: 4 },
   jason: { icon: '🧐', label: 'Dificil', maxMistakes: 3 },
   special: { icon: '⚽', label: 'Mundial 2026', maxMistakes: 4 },
+  deportes: { icon: '🏅', label: 'Deportes', maxMistakes: 4 },
 };
 
 function appendModeResult(lines, mode, data) {
@@ -332,7 +333,7 @@ export function getAllShareText(results, puzzleDate) {
     (mode) => results[mode] && results[mode].won !== undefined
   );
 
-  const order = ['normal', 'jason', 'special'];
+  const order = ['normal', 'jason', 'deportes', 'special'];
   for (const mode of order) {
     if (playedModes.includes(mode)) {
       appendModeResult(lines, mode, results[mode]);
