@@ -202,6 +202,42 @@ describe('Modo Mundial - rotacion diaria', () => {
   });
 });
 
+describe('Modo Mundial - fechas limite con hora del dia', () => {
+  // Regresion del bug del 19/07/2026: el modo desaparecia el ultimo dia
+  // porque el limite final se creaba a las 00:00:00. Estos tests prueban
+  // horas reales del dia, no solo la medianoche exacta.
+
+  it('el modo esta activo durante TODO el ultimo dia (19 de julio)', () => {
+    expect(isMundialActive(new Date(2026, 6, 19, 0, 0, 1))).toBe(true);   // madrugada
+    expect(isMundialActive(new Date(2026, 6, 19, 8, 30))).toBe(true);     // manana
+    expect(isMundialActive(new Date(2026, 6, 19, 14, 0))).toBe(true);     // tarde
+    expect(isMundialActive(new Date(2026, 6, 19, 21, 0))).toBe(true);     // hora de la final
+    expect(isMundialActive(new Date(2026, 6, 19, 23, 59, 59))).toBe(true); // ultimo segundo
+  });
+
+  it('el modo esta activo durante TODO el primer dia (11 de junio)', () => {
+    expect(isMundialActive(new Date(2026, 5, 11, 0, 0, 0))).toBe(true);
+    expect(isMundialActive(new Date(2026, 5, 11, 12, 0))).toBe(true);
+    expect(isMundialActive(new Date(2026, 5, 11, 23, 59, 59))).toBe(true);
+  });
+
+  it('el modo NO esta activo justo antes ni justo despues del rango', () => {
+    expect(isMundialActive(new Date(2026, 5, 10, 23, 59, 59))).toBe(false); // vispera, ultimo segundo
+    expect(isMundialActive(new Date(2026, 6, 20, 0, 0, 0))).toBe(false);    // dia siguiente, medianoche
+    expect(isMundialActive(new Date(2026, 6, 20, 0, 0, 1))).toBe(false);
+  });
+
+  it('getDailyPuzzle devuelve puzzle Mundial a cualquier hora del ultimo dia', () => {
+    const morning = getDailyPuzzle(new Date(2026, 6, 19, 9, 0), 'special');
+    const evening = getDailyPuzzle(new Date(2026, 6, 19, 22, 0), 'special');
+    expect(morning).not.toBeNull();
+    expect(evening).not.toBeNull();
+    expect(morning.id).toMatch(/^mundial-/);
+    // El puzzle del dia debe ser el mismo sin importar la hora
+    expect(morning.id).toBe(evening.id);
+  });
+});
+
 describe('Normal vs Jason mode', () => {
   it('returns different puzzles for the same date', () => {
     const date = new Date(2026, 6, 1);  // July 1, 2026
@@ -286,35 +322,5 @@ describe('getDailyPuzzle', () => {
     expect(puzzle.date.getFullYear()).toBe(now.getFullYear());
     expect(puzzle.date.getMonth()).toBe(now.getMonth());
     expect(puzzle.date.getDate()).toBe(now.getDate());
-  });
-});
-describe('Modo Mundial - fechas limite con hora del dia', () => {
-  it('el modo esta activo durante TODO el ultimo dia (19 de julio)', () => {
-    expect(isMundialActive(new Date(2026, 6, 19, 0, 0, 1))).toBe(true);
-    expect(isMundialActive(new Date(2026, 6, 19, 8, 30))).toBe(true);
-    expect(isMundialActive(new Date(2026, 6, 19, 14, 0))).toBe(true);
-    expect(isMundialActive(new Date(2026, 6, 19, 21, 0))).toBe(true);
-    expect(isMundialActive(new Date(2026, 6, 19, 23, 59, 59))).toBe(true);
-  });
-
-  it('el modo esta activo durante TODO el primer dia (11 de junio)', () => {
-    expect(isMundialActive(new Date(2026, 5, 11, 0, 0, 0))).toBe(true);
-    expect(isMundialActive(new Date(2026, 5, 11, 12, 0))).toBe(true);
-    expect(isMundialActive(new Date(2026, 5, 11, 23, 59, 59))).toBe(true);
-  });
-
-  it('el modo NO esta activo justo antes ni justo despues del rango', () => {
-    expect(isMundialActive(new Date(2026, 5, 10, 23, 59, 59))).toBe(false);
-    expect(isMundialActive(new Date(2026, 6, 20, 0, 0, 0))).toBe(false);
-    expect(isMundialActive(new Date(2026, 6, 20, 0, 0, 1))).toBe(false);
-  });
-
-  it('getDailyPuzzle devuelve puzzle Mundial a cualquier hora del ultimo dia', () => {
-    const morning = getDailyPuzzle(new Date(2026, 6, 19, 9, 0), 'special');
-    const evening = getDailyPuzzle(new Date(2026, 6, 19, 22, 0), 'special');
-    expect(morning).not.toBeNull();
-    expect(evening).not.toBeNull();
-    expect(morning.id).toMatch(/^mundial-/);
-    expect(morning.id).toBe(evening.id);
   });
 });
