@@ -209,6 +209,7 @@ export default function ConnectionsGame() {
   const playedNormal = !isArchive && hasPlayedToday('normal');
   const playedJason = !isArchive && hasPlayedToday('jason');
   const playedSpecial = !isArchive && hasPlayedToday('special');
+  const playedDeportes = !isArchive && hasPlayedToday('deportes');
   const currentMode = gameMode;
   const hasPlayed = !isArchive && hasPlayedToday(currentMode);
   const allPlayed = playedNormal && playedJason && (!hasSpecial || playedSpecial);
@@ -699,6 +700,21 @@ export default function ConnectionsGame() {
                   <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${playedJason ? 'bg-gray-400' : 'bg-orange-400'}`} />
                   Difícil{playedJason ? ' ✓' : ''}
                 </button>
+                <button
+                  onClick={() => switchMode('deportes')}
+                  className={`px-3 py-1.5 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 sm:gap-2 whitespace-nowrap ${
+                    gameMode === 'deportes' && !playedDeportes
+                      ? 'bg-sky-600 text-white shadow-md ring-2 ring-sky-400'
+                      : playedDeportes
+                        ? 'text-[var(--color-text-subtle)] opacity-40 cursor-not-allowed'
+                        : 'text-[var(--color-text-subtle)] hover:text-[var(--color-text)] hover:bg-[var(--color-tile-absent)]/20'
+                  }`}
+                  disabled={playedDeportes}
+                  title={playedDeportes ? 'Ya jugado hoy' : 'Modo Deportes'}
+                >
+                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${playedDeportes ? 'bg-gray-400' : 'bg-sky-400'}`} />
+                  🏅 Deportes{playedDeportes ? ' ✓' : ''}
+                </button>
                 {hasSpecial && (
                   <button
                     onClick={() => switchMode('special')}
@@ -735,8 +751,21 @@ export default function ConnectionsGame() {
                     {playedJason ? 'Completado' : '4 grupos de 4 · 8 palabras señuelo'}
                   </div>
                 )}
+                {gameMode === 'deportes' && (
+                  <div className={!playedDeportes ? 'font-medium' : 'text-[var(--color-text-subtle)]'}>
+                    {playedDeportes ? 'Completado' : '4 grupos de 4 · 4 palabras señuelo'}
+                  </div>
+                )}
               </div>
             </div>
+            {gameMode === 'deportes' && puzzle?.tema && (
+              <div className="flex justify-center mb-3">
+                <div className="px-4 py-1.5 rounded-full bg-sky-600/15 border border-sky-500/30 text-sky-300 text-sm font-bold flex items-center gap-2">
+                  <span>🏅</span>
+                  <span>Tema de hoy: {puzzle.tema}</span>
+                </div>
+              </div>
+            )}
           </>
         )}
 
