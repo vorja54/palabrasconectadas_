@@ -383,5 +383,61 @@
         }, 2000);
       });
     </script>
+    <!-- Banner de consentimiento de cookies (RGPD) -->
+    <div id="cookie-consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#1a1a2e;color:#fff;padding:16px 20px;box-shadow:0 -2px 12px rgba(0,0,0,.3);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:14px;line-height:1.5;">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+        <span style="flex:1;min-width:240px;">
+          Usamos cookies propias y de terceros (Google AdSense) para analizar el uso del sitio y mostrar anuncios. Puedes aceptarlas o rechazar las no esenciales.
+          <a href="/privacy/" style="color:#7db3ff;text-decoration:underline;">Más información</a>.
+        </span>
+        <span style="display:flex;gap:8px;flex-shrink:0;">
+          <button id="cookie-reject" style="background:transparent;color:#fff;border:1px solid #555;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;">Rechazar</button>
+          <button id="cookie-accept" style="background:#4ade80;color:#0b3d1a;border:none;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:700;cursor:pointer;">Aceptar</button>
+        </span>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var KEY = 'cookie-consent-v1';
+        var banner = document.getElementById('cookie-consent');
+        var saved = null;
+        try { saved = localStorage.getItem(KEY); } catch (e) {}
+
+        // Configurar el modo de consentimiento de Google (por defecto denegado hasta que el usuario decida)
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        function applyConsent(granted) {
+          gtag('consent', 'update', {
+            ad_storage: granted ? 'granted' : 'denied',
+            ad_user_data: granted ? 'granted' : 'denied',
+            ad_personalization: granted ? 'granted' : 'denied',
+            analytics_storage: granted ? 'granted' : 'denied'
+          });
+        }
+        // Estado por defecto denegado
+        gtag('consent', 'default', {
+          ad_storage: 'denied', ad_user_data: 'denied',
+          ad_personalization: 'denied', analytics_storage: 'denied'
+        });
+
+        if (saved === 'accepted') {
+          applyConsent(true);
+        } else if (saved === 'rejected') {
+          applyConsent(false);
+        } else if (banner) {
+          banner.style.display = 'block';
+        }
+
+        function choose(value) {
+          try { localStorage.setItem(KEY, value); } catch (e) {}
+          applyConsent(value === 'accepted');
+          if (banner) banner.style.display = 'none';
+        }
+        var a = document.getElementById('cookie-accept');
+        var r = document.getElementById('cookie-reject');
+        if (a) a.addEventListener('click', function(){ choose('accepted'); });
+        if (r) r.addEventListener('click', function(){ choose('rejected'); });
+      })();
+    </script>
   </body>
 </html>
