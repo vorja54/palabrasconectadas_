@@ -192,6 +192,11 @@ const ABOUT_PAGE = `<!DOCTYPE html>
       <p>Para los que buscan un reto mayor. Incluye 16 palabras del puzzle más 8 palabras señuelo que distraen y confunden. Solo tienes 3 errores permitidos. Las categorías suelen ser más elaboradas y requieren mayor pensamiento lateral. Recomendado para jugadores que ya dominan el modo normal.</p>
     </div>
 
+    <div class="highlight blue">
+      <h3>Modo Deportes</h3>
+      <p>Un modo temático dedicado al mundo del deporte, con un tema distinto cada día que se muestra en la cabecera: fútbol (Real Madrid, Barça, Champions...), baloncesto (NBA, Lakers...), tenis, Fórmula 1, ciclismo, golf y mucho más. Son 16 palabras sin señuelos y 3 errores permitidos. Perfecto para los aficionados al deporte que quieren poner a prueba sus conocimientos.</p>
+    </div>
+
     <div class="highlight">
       <h3>Edición Especial: Mundial 2026</h3>
       <p>Con motivo de la Copa del Mundo 2026, hemos creado una serie especial de 25 puzzles temáticos que rotan durante el torneo. Cada puzzle incluye categorías relacionadas con el fútbol, selecciones nacionales, jugadores históricos, estadios y términos futboleros. Contenido exclusivo disponible solo durante la temporada mundialista.</p>
