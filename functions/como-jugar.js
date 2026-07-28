@@ -151,7 +151,7 @@ const COMO_JUGAR_PAGE = `<!DOCTYPE html>
       <div class="step-num">1</div>
       <div class="step-content">
         <h3>Observa todas las palabras</h3>
-        <p>En la pantalla verás entre 20 y 24 palabras (dependiendo del modo de juego) organizadas en una cuadrícula. Tómate un momento para leerlas todas y busca patrones, temas comunes o palabras que parezcan estar relacionadas entre sí.</p>
+        <p>En la pantalla verás entre 16 y 24 palabras (dependiendo del modo de juego) organizadas en una cuadrícula. Tómate un momento para leerlas todas y busca patrones, temas comunes o palabras que parezcan estar relacionadas entre sí.</p>
       </div>
     </div>
 
@@ -225,6 +225,11 @@ const COMO_JUGAR_PAGE = `<!DOCTYPE html>
     <div class="card red">
       <h3>Modo Difícil</h3>
       <p>Para los que buscan un reto mayor. Incluye 16 palabras del puzzle más 8 palabras señuelo (24 palabras totales en pantalla). Solo tienes 3 errores permitidos. Las palabras señuelo adicionales hacen que identificar las categorías reales sea mucho más complejo. Recomendado para jugadores que ya dominan el modo Normal.</p>
+    </div>
+
+    <div class="card blue">
+      <h3>Modo Deportes</h3>
+      <p>Un puzzle temático dedicado al deporte que cambia cada día: fútbol, baloncesto, tenis, Fórmula 1, ciclismo y mucho más. En la cabecera verás el tema del día (por ejemplo, "NBA" o "Real Madrid"). Son 16 palabras <strong>sin señuelos</strong> y dispones de 3 errores. Un modo perfecto para los aficionados al deporte.</p>
     </div>
 
     <div class="card blue">
