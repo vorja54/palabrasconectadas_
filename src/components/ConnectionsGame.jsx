@@ -213,7 +213,7 @@ export default function ConnectionsGame() {
   const currentMode = gameMode;
   const hasPlayed = !isArchive && hasPlayedToday(currentMode);
   const allPlayed = playedNormal && playedJason && (!hasSpecial || playedSpecial);
-  const MAX_MISTAKES = gameMode === 'jason' ? 3 : 4;
+  const MAX_MISTAKES = gameMode === 'jason' ? 3 : gameMode === 'deportes' ? 3 : 4;
 
   useEffect(() => {
     if (challengeCode) {
@@ -247,7 +247,8 @@ export default function ConnectionsGame() {
       // (p.ej. una PWA con service worker desactualizado tras un deploy).
       const isValidSavedState = (s) => {
         if (!s || !Array.isArray(s.shuffledWords) || !Array.isArray(s.solvedCategories)) return false;
-        const expectedTotal = 16 + (currentMode === 'jason' ? 8 : 4);
+        const decoysForMode = currentMode === 'jason' ? 8 : currentMode === 'deportes' ? 0 : 4;
+        const expectedTotal = 16 + decoysForMode;
         if (s.solvedCategories.length * 4 + s.shuffledWords.length !== expectedTotal) return false;
         // Cada ficha del tablero debe pertenecer al puzzle actual o ser señuelo
         for (const item of s.shuffledWords) {
@@ -298,7 +299,7 @@ export default function ConnectionsGame() {
       });
     });
 
-    const decoyCount = gameMode === 'jason' ? 8 : 4;
+    const decoyCount = gameMode === 'jason' ? 8 : gameMode === 'deportes' ? 0 : 4;
     const decoys = getDecoyWords(decoyCount, puzzleWords, puzzle.date);
     decoys.forEach((word) => {
       items.push({
@@ -753,7 +754,7 @@ export default function ConnectionsGame() {
                 )}
                 {gameMode === 'deportes' && (
                   <div className={!playedDeportes ? 'font-medium' : 'text-[var(--color-text-subtle)]'}>
-                    {playedDeportes ? 'Completado' : '4 grupos de 4 · 4 palabras señuelo'}
+                    {playedDeportes ? 'Completado' : '4 grupos de 4 · sin señuelos · 3 vidas'}
                   </div>
                 )}
               </div>
@@ -844,15 +845,16 @@ export default function ConnectionsGame() {
               Selecciona 4 palabras que creas que pertenecen a la misma categoría y presiona "Enviar".
               Si aciertas, se revelará el grupo con un color que indica su dificultad:
               <strong> amarillo</strong> (fácil), <strong>verde</strong> (medio), <strong>azul</strong>
-              (difícil) o <strong>morado</strong> (muy difícil). Tienes 4 errores en modo Normal y
-              3 en modo Difícil.
+              (difícil) o <strong>morado</strong> (muy difícil). Tienes 4 errores en modo Normal,
+              3 en modo Difícil y 3 en modo Deportes.
             </p>
 
             <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--color-text-subtle)]">Modos de juego</h3>
             <p className="text-[var(--color-text-subtle)]">
               <strong>Modo Normal:</strong> 16 palabras + 4 señuelos, 4 errores permitidos.
               Ideal para empezar. <strong>Modo Difícil:</strong> 16 palabras + 8 señuelos, 3 errores.
-              Para jugadores experimentados. Durante el Mundial 2026, también hay puzzles temáticos especiales.
+              Para jugadores experimentados. <strong>Modo Deportes:</strong> 16 palabras sin señuelos
+              y 3 errores, con un tema deportivo distinto cada día. Durante el Mundial 2026, también hay puzzles temáticos especiales.
             </p>
 
             <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--color-text-subtle)]">Beneficios</h3>
