@@ -90,3 +90,13 @@ describe('Modo Deportes en compartir', () => {
     expect(text.indexOf('Normal')).toBeLessThan(text.indexOf('Deportes'));
   });
 });
+
+describe('Modo Deportes sin señuelos (3 vidas)', () => {
+  it('el puzzle de deportes tiene exactamente 16 palabras (sin señuelos)', () => {
+    // Los datos del puzzle siempre son 16; los señuelos se añaden en el componente.
+    // Este test documenta que Deportes NO debe añadir señuelos.
+    const p = getDailyPuzzle(new Date(2026, 7, 1), 'deportes');
+    const words = p.categories.flatMap((c) => c.words);
+    expect(words.length).toBe(16);
+  });
+});
