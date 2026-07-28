@@ -27,7 +27,7 @@ const FAQ_PAGE = `<!DOCTYPE html>
       {
         "@type": "Question",
         "name": "¿Cuántos errores puedo cometer?",
-        "acceptedAnswer": { "@type": "Answer", "text": "En modo Normal tienes 4 errores. En modo Difícil tienes 3 errores." }
+        "acceptedAnswer": { "@type": "Answer", "text": "En modo Normal tienes 4 errores. En modo Difícil tienes 3 errores. En modo Deportes tienes 3 errores." }
       },
       {
         "@type": "Question",
@@ -170,10 +170,11 @@ const FAQ_PAGE = `<!DOCTYPE html>
 
     <div class="faq-item">
       <h3>¿Qué modos de juego existen?</h3>
-      <p>Hay tres modos de juego principales:</p>
+      <p>Hay cuatro modos de juego principales:</p>
       <ul>
         <li><strong>Modo Normal:</strong> 16 palabras + 4 señuelos, 4 errores permitidos. El modo clásico y equilibrado.</li>
         <li><strong>Modo Difícil:</strong> 16 palabras + 8 señuelos, 3 errores permitidos. Para jugadores experimentados.</li>
+        <li><strong>Modo Deportes:</strong> 16 palabras sin señuelos, 3 errores permitidos. Un tema deportivo distinto cada día.</li>
         <li><strong>Edición Especial:</strong> puzzles temáticos durante eventos especiales como el Mundial 2026.</li>
       </ul>
     </div>
@@ -193,12 +194,12 @@ const FAQ_PAGE = `<!DOCTYPE html>
 
     <div class="faq-item">
       <h3>¿Cuántos errores puedo cometer?</h3>
-      <p>En el modo Normal tienes 4 errores permitidos. En el modo Difícil tienes 3 errores. Cuando agotas todos tus errores, el juego termina y se revelan las soluciones de todas las categorías que no hayas resuelto.</p>
+      <p>En el modo Normal tienes 4 errores permitidos. En el modo Difícil tienes 3 errores. En el modo Deportes tienes 3 errores. Cuando agotas todos tus errores, el juego termina y se revelan las soluciones de todas las categorías que no hayas resuelto.</p>
     </div>
 
     <div class="faq-item">
       <h3>¿Qué son las palabras señuelo?</h3>
-      <p>Las palabras señuelo son palabras adicionales que aparecen en la pantalla pero NO pertenecen a ninguna categoría del puzzle. Están diseñadas específicamente para confundir y distraer al jugador, aumentando la dificultad del desafío. En el modo Normal hay 4 señuelos, y en el modo Difícil hay 8.</p>
+      <p>Las palabras señuelo son palabras adicionales que aparecen en la pantalla pero NO pertenecen a ninguna categoría del puzzle. Están diseñadas específicamente para confundir y distraer al jugador, aumentando la dificultad del desafío. En el modo Normal hay 4 señuelos, y en el modo Difícil hay 8. El modo Deportes no tiene señuelos: sus 16 palabras pertenecen todas a alguna categoría.</p>
     </div>
 
     <div class="faq-item">
