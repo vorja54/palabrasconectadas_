@@ -282,7 +282,7 @@ const MODE_CONFIG = {
   normal: { icon: '🔗', label: 'Normal', maxMistakes: 4 },
   jason: { icon: '🧐', label: 'Dificil', maxMistakes: 3 },
   special: { icon: '⚽', label: 'Mundial 2026', maxMistakes: 4 },
-  deportes: { icon: '🏅', label: 'Deportes', maxMistakes: 4 },
+  deportes: { icon: '🎯', label: 'Tematico', maxMistakes: 3 },
 };
 
 function appendModeResult(lines, mode, data) {
