@@ -4,7 +4,7 @@ import { getAllShareTextForTwitter, getAllShareText } from '../connectionsLogic.
 
 describe('Modo Temático', () => {
   it('tiene al menos 180 puzzles', () => {
-    expect(TEMATICO_PUZZLES.length).toBeGreaterThanOrEqual(180);
+    expect(TEMATICO_PUZZLES.length).toBeGreaterThanOrEqual(240);
   });
 
   it('los 4 temas están presentes', () => {
