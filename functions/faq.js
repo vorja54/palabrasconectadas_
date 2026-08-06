@@ -174,7 +174,7 @@ const FAQ_PAGE = `<!DOCTYPE html>
       <ul>
         <li><strong>Modo Normal:</strong> 16 palabras + 4 señuelos, 4 errores permitidos. El modo clásico y equilibrado.</li>
         <li><strong>Modo Difícil:</strong> 16 palabras + 8 señuelos, 3 errores permitidos. Para jugadores experimentados.</li>
-        <li><strong>Modo Deportes:</strong> 16 palabras sin señuelos, 3 errores permitidos. Un tema deportivo distinto cada día.</li>
+        <li><strong>Modo Temático:</strong> 16 palabras sin señuelos, 3 errores permitidos. Una temática distinta cada día: Deportes, Historia, Literatura y Ciencia.</li>
         <li><strong>Edición Especial:</strong> puzzles temáticos durante eventos especiales como el Mundial 2026.</li>
       </ul>
     </div>
