@@ -228,8 +228,8 @@ const COMO_JUGAR_PAGE = `<!DOCTYPE html>
     </div>
 
     <div class="card blue">
-      <h3>Modo Deportes</h3>
-      <p>Un puzzle temático dedicado al deporte que cambia cada día: fútbol, baloncesto, tenis, Fórmula 1, ciclismo y mucho más. En la cabecera verás el tema del día (por ejemplo, "NBA" o "Real Madrid"). Son 16 palabras <strong>sin señuelos</strong> y dispones de 3 errores. Un modo perfecto para los aficionados al deporte.</p>
+      <h3>Modo Temático</h3>
+      <p>Un puzzle temático que cambia de temática cada día, rotando entre Deportes, Historia, Literatura y Ciencia. En la cabecera verás el tema y subtema del día (por ejemplo, "Deportes: NBA" o "Historia: Imperio Romano"). Son 16 palabras <strong>sin señuelos</strong> y dispones de 3 errores. Un modo perfecto para poner a prueba tu cultura general.</p>
     </div>
 
     <div class="card blue">
