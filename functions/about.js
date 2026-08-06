@@ -193,8 +193,8 @@ const ABOUT_PAGE = `<!DOCTYPE html>
     </div>
 
     <div class="highlight blue">
-      <h3>Modo Deportes</h3>
-      <p>Un modo temático dedicado al mundo del deporte, con un tema distinto cada día que se muestra en la cabecera: fútbol (Real Madrid, Barça, Champions...), baloncesto (NBA, Lakers...), tenis, Fórmula 1, ciclismo, golf y mucho más. Son 16 palabras sin señuelos y 3 errores permitidos. Perfecto para los aficionados al deporte que quieren poner a prueba sus conocimientos.</p>
+      <h3>Modo Temático</h3>
+      <p>Un modo con una temática distinta cada día, que rota entre Deportes, Historia, Literatura y Ciencia. La cabecera muestra el tema y subtema del día (por ejemplo, "Ciencia: El Sistema Solar" o "Literatura: Cervantes y el Quijote"). Son 16 palabras sin señuelos y 3 errores permitidos. Perfecto para quienes disfrutan poniendo a prueba su cultura general.</p>
     </div>
 
     <div class="highlight">
