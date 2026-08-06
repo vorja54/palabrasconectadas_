@@ -711,10 +711,10 @@ export default function ConnectionsGame() {
                         : 'text-[var(--color-text-subtle)] hover:text-[var(--color-text)] hover:bg-[var(--color-tile-absent)]/20'
                   }`}
                   disabled={playedDeportes}
-                  title={playedDeportes ? 'Ya jugado hoy' : 'Modo Deportes'}
+                  title={playedDeportes ? 'Ya jugado hoy' : 'Modo Temático'}
                 >
                   <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${playedDeportes ? 'bg-gray-400' : 'bg-sky-400'}`} />
-                  🏅 Deportes{playedDeportes ? ' ✓' : ''}
+                  🎯 Temático{playedDeportes ? ' ✓' : ''}
                 </button>
                 {hasSpecial && (
                   <button
@@ -762,8 +762,8 @@ export default function ConnectionsGame() {
             {gameMode === 'deportes' && puzzle?.tema && (
               <div className="flex justify-center mb-3">
                 <div className="px-4 py-1.5 rounded-full bg-sky-600/15 border border-sky-500/30 text-sky-300 text-sm font-bold flex items-center gap-2">
-                  <span>🏅</span>
-                  <span>Tema de hoy: {puzzle.tema}</span>
+                  <span>🎯</span>
+                  <span>{puzzle.subtema ? `${puzzle.tema}: ${puzzle.subtema}` : puzzle.tema}</span>
                 </div>
               </div>
             )}
@@ -846,15 +846,15 @@ export default function ConnectionsGame() {
               Si aciertas, se revelará el grupo con un color que indica su dificultad:
               <strong> amarillo</strong> (fácil), <strong>verde</strong> (medio), <strong>azul</strong>
               (difícil) o <strong>morado</strong> (muy difícil). Tienes 4 errores en modo Normal,
-              3 en modo Difícil y 3 en modo Deportes.
+              3 en modo Difícil y 3 en modo Temático.
             </p>
 
             <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--color-text-subtle)]">Modos de juego</h3>
             <p className="text-[var(--color-text-subtle)]">
               <strong>Modo Normal:</strong> 16 palabras + 4 señuelos, 4 errores permitidos.
               Ideal para empezar. <strong>Modo Difícil:</strong> 16 palabras + 8 señuelos, 3 errores.
-              Para jugadores experimentados. <strong>Modo Deportes:</strong> 16 palabras sin señuelos
-              y 3 errores, con un tema deportivo distinto cada día. Durante el Mundial 2026, también hay puzzles temáticos especiales.
+              Para jugadores experimentados. <strong>Modo Temático:</strong> 16 palabras sin señuelos
+              y 3 errores, con un tema distinto cada día (Deportes, Historia, Literatura, Ciencia). Durante el Mundial 2026, también hay puzzles temáticos especiales.
             </p>
 
             <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--color-text-subtle)]">Beneficios</h3>
