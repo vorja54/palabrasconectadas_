@@ -167,6 +167,7 @@ export default function ConnectionsGame() {
     setGameOver(false);
     setWon(false);
     setSolvedCategories([]);
+    setLastGuessBreakdown(null);
     timerStartedRef.current = false;
     setTimerStarted(false);
     setElapsed(0);
@@ -232,6 +233,7 @@ export default function ConnectionsGame() {
     setGameOver(false);
     setWon(false);
     setSolvedCategories([]);
+    setLastGuessBreakdown(null);
     timerStartedRef.current = false;
     setTimerStarted(false);
     setElapsed(0);
