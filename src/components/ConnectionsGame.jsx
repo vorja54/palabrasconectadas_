@@ -72,6 +72,8 @@ export default function ConnectionsGame() {
   const [toast, setToast] = useState({ show: false, message: '' });
   const [animatingIds, setAnimatingIds] = useState(new Set());
   const [mistakeShake, setMistakeShake] = useState(false);
+  const [hintEnabled, setHintEnabled] = useState(false);
+  const [lastGuessBreakdown, setLastGuessBreakdown] = useState(null);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   
   // Timer state
@@ -363,6 +365,7 @@ export default function ConnectionsGame() {
 
       if (soundEnabled) playSubmitCorrect();
       setAnimatingIds(new Set(selectedIds));
+      setLastGuessBreakdown(null);
       setTimeout(() => {
         const currentElapsed = elapsedRef.current;
         setSolvedCategories((prev) => [
@@ -410,6 +413,20 @@ export default function ConnectionsGame() {
       } else {
         if (soundEnabled) playSubmitWrong();
       }
+
+      // Desglose para la pista opcional: tamaños de grupo (sin revelar cuál es cada grupo)
+      // y cuántos señuelos. Se ordena de mayor a menor para no delatar posiciones.
+      const groupSizes = [];
+      let decoyCount = 0;
+      for (const [idx, count] of Object.entries(categoryCounts)) {
+        if (Number(idx) >= 0 && puzzle.categories[Number(idx)]) {
+          groupSizes.push(count);
+        } else {
+          decoyCount += count;
+        }
+      }
+      groupSizes.sort((a, b) => b - a);
+      setLastGuessBreakdown({ groupSizes, decoyCount });
 
       setMistakeShake(true);
       setTimeout(() => setMistakeShake(false), 500);
@@ -808,6 +825,9 @@ export default function ConnectionsGame() {
             handleSubmit={handleSubmit}
             handleShuffle={handleShuffle}
             handleDeselectAll={handleDeselectAll}
+            hintEnabled={hintEnabled}
+            setHintEnabled={setHintEnabled}
+            lastGuessBreakdown={lastGuessBreakdown}
             fontSize={fontSize}
             staggerKey={staggerKey}
                       />

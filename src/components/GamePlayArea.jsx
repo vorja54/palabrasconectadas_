@@ -5,7 +5,8 @@ import AdBanner from './AdBanner';
 export default function GamePlayArea({
   solvedCategories, shuffledWords, selectedIds, mistakeShake, animatingIds,
   onSelectWord, timerStarted, elapsed, mistakes, MAX_MISTAKES, gameOver,
-  handleSubmit, handleShuffle, handleDeselectAll, fontSize, staggerKey,
+  handleSubmit, handleShuffle, handleDeselectAll, hintEnabled, setHintEnabled,
+  lastGuessBreakdown, fontSize, staggerKey,
   }) {
   return (
     <>
@@ -28,6 +29,32 @@ export default function GamePlayArea({
           staggerKey={staggerKey}
           />
       </div>
+
+      {hintEnabled && lastGuessBreakdown && !gameOver && (
+        <div className="flex flex-col items-center gap-1.5 mt-3 mb-1">
+          <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-subtle)] font-semibold">Tu último intento</span>
+          <div className="flex items-center gap-2.5">
+            {lastGuessBreakdown.groupSizes.map((size, gi) => (
+              <div key={gi} className="flex gap-1">
+                {Array.from({ length: size }).map((_, i) => (
+                  <span
+                    key={i}
+                    className="w-5 h-5 rounded-md"
+                    style={{ backgroundColor: size === 3 ? '#1D9E75' : size === 2 ? '#378ADD' : '#EF9F27' }}
+                  />
+                ))}
+              </div>
+            ))}
+            {lastGuessBreakdown.decoyCount > 0 && (
+              <div className="flex gap-1">
+                {Array.from({ length: lastGuessBreakdown.decoyCount }).map((_, i) => (
+                  <span key={i} className="w-5 h-5 rounded-md" style={{ backgroundColor: '#B4B2A9' }} />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="flex items-center justify-center gap-3 mt-4 mb-2">
         <div className="flex items-center gap-1 bg-[var(--color-tile-default)] px-2.5 py-1 rounded-lg shadow-sm border border-[var(--color-border)]/50">
@@ -57,7 +84,15 @@ export default function GamePlayArea({
 
       <AdBanner className="my-3" />
 
-      <div className="flex justify-center gap-2 mt-5 mb-4">
+      <div className="flex justify-center items-center gap-2 mt-5 mb-4 flex-wrap">
+        <button
+          onClick={() => setHintEnabled((v) => !v)}
+          disabled={gameOver}
+          className={`nyt-btn ${hintEnabled ? 'nyt-btn-primary' : 'nyt-btn-secondary'}`}
+          title="Muestra, tras cada fallo, cuántas palabras van juntas (sin decir de qué grupo)"
+        >
+          💡 Pista: {hintEnabled ? 'ON' : 'OFF'}
+        </button>
         <button onClick={handleShuffle} disabled={gameOver} className="nyt-btn nyt-btn-secondary">
           ↻ Mezclar
         </button>
