@@ -95,3 +95,49 @@ describe('Modo Temático en compartir', () => {
     expect(text.indexOf('Normal')).toBeLessThan(text.indexOf('Tematico'));
   });
 });
+
+describe('Pista opcional (desglose de intento)', () => {
+  // Replica la lógica de cálculo del desglose que usa el componente:
+  // agrupa por tamaño de grupo (sin revelar cuál) y cuenta señuelos aparte.
+  function calcularDesglose(categoryCounts, categories) {
+    const groupSizes = [];
+    let decoyCount = 0;
+    for (const [idx, count] of Object.entries(categoryCounts)) {
+      if (Number(idx) >= 0 && categories[Number(idx)]) groupSizes.push(count);
+      else decoyCount += count;
+    }
+    groupSizes.sort((a, b) => b - a);
+    return { groupSizes, decoyCount };
+  }
+  const cats = [{}, {}, {}, {}]; // 4 categorías simuladas
+
+  it('2 de un grupo + 1 de otro + 1 señuelo → [2,1] y 1 señuelo', () => {
+    const d = calcularDesglose({ '0': 2, '1': 1, '-1': 1 }, cats);
+    expect(d.groupSizes).toEqual([2, 1]);
+    expect(d.decoyCount).toBe(1);
+  });
+
+  it('3 del mismo grupo + 1 señuelo → [3] y 1 señuelo', () => {
+    const d = calcularDesglose({ '2': 3, '-1': 1 }, cats);
+    expect(d.groupSizes).toEqual([3]);
+    expect(d.decoyCount).toBe(1);
+  });
+
+  it('ordena los tamaños de mayor a menor (no revela posición)', () => {
+    const d = calcularDesglose({ '0': 1, '1': 3 }, cats);
+    expect(d.groupSizes).toEqual([3, 1]);
+  });
+
+  it('4 señuelos → sin grupos, 4 señuelos', () => {
+    const d = calcularDesglose({ '-1': 4 }, cats);
+    expect(d.groupSizes).toEqual([]);
+    expect(d.decoyCount).toBe(4);
+  });
+
+  it('el desglose no incluye los índices de grupo (solo tamaños)', () => {
+    const d = calcularDesglose({ '0': 2, '3': 2 }, cats);
+    // dos grupos de 2: el resultado es [2,2], sin pista de CUÁLES son
+    expect(d.groupSizes).toEqual([2, 2]);
+    expect(d.decoyCount).toBe(0);
+  });
+});
